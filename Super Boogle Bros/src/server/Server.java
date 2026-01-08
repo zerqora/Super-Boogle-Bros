@@ -1,8 +1,11 @@
+package server;
 
-
-import java.io.IOexception;
+import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
+
 public class Server implements Runnable{
+
 
     private int port; // port that the server runs on
     private boolean running = false;
@@ -31,13 +34,14 @@ public class Server implements Runnable{
         while(running){
             try{
                 Socket socket = serverSocket.accept();
-                iniSocket(socket)
+                iniSocket(socket);
             }
             catch(IOException e){
                 e.printStackTrace();
             }
 
         }
+        // server.Server has stopped running. Shut down the server.
         shutdown();
     }
 
@@ -52,7 +56,7 @@ public class Server implements Runnable{
         running = false;
 
         try{
-            serverSocket.close()
+            serverSocket.close();
         }
         catch(IOException e){
             e.printStackTrace();
