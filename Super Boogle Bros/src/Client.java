@@ -6,6 +6,7 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.net.SocketException;
 import javax.imageio.IIOException;
+import packets.RemovePlayerPacket;
 
 
 

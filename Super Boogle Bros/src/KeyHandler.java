@@ -1,6 +1,3 @@
-
-// NOTE IF DIAG MOVEMENT BREAKS GAME, REMOVE ALL IF's, MAKE ONlY IF ELSE
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

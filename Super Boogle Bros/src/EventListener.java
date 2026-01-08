@@ -1,4 +1,8 @@
 
+import packets.AddPlayerPacket;
+import packets.RemovePlayerPacket;
+
+
 
 
 public class EventListener {
@@ -9,6 +13,17 @@ public class EventListener {
         if(p instanceof AddPlayerPacket)
         {
             AddPlayerPacket packet = (AddPlayerPacket) p;
+            PlayerHandler.players.put(packet.id, new NetPLayer(packet.id, packet.name));
+
+            System.out.println(packet.name + " has joined the game");
+        }
+        else if (p instanceof  RemovePlayerPacket)
+        {
+            RemovePlayerPacket packet = (RemovePlayerPacket) p;
+
+            System.out.println(PlayerHandler.players.get(packet.id).name + " has quit the game");
+
+            PlayerHandler.players.remove(packet.id);
         }
     }
 }
