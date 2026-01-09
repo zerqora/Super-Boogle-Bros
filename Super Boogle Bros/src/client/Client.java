@@ -7,8 +7,7 @@ import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
 import packets.RemovePlayerPacket;
-
-
+import server.Connection;
 
 
 public class Client implements Runnable
@@ -22,7 +21,7 @@ public class Client implements Runnable
     private boolean running = false;
 
     private EventListener listener;
-
+    private Connection connection;
 
 
     // constructor

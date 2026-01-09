@@ -26,6 +26,7 @@ public class Server implements Runnable{
 
     public void start() {
         new Thread(this).start();
+        System.out.println("Server Started");
     }
 
     @Override
