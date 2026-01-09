@@ -1,3 +1,5 @@
+package client;
+
 
 import packets.AddPlayerPacket;
 import packets.RemovePlayerPacket;

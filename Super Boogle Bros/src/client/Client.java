@@ -1,10 +1,12 @@
+package client;
+
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
-import packets.RemovePlayerPacket;
+import src.packets.RemovePlayerPacket;
 
 
 
@@ -69,7 +71,7 @@ public class Client implements Runnable
         } catch (IOException e) 
         {
             e.printStackTrace();
-        }6
+        }
     }
 
     // send data to server
