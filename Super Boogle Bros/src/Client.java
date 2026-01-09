@@ -4,8 +4,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
-import java.net.SocketException;
-import javax.imageio.IIOException;
 import packets.RemovePlayerPacket;
 
 
@@ -71,7 +69,7 @@ public class Client implements Runnable
         } catch (IOException e) 
         {
             e.printStackTrace();
-        }
+        }6
     }
 
     // send data to server
@@ -91,28 +89,17 @@ public class Client implements Runnable
     @Override
     public void run()
     {
-        try{
-            running = true;
-
-            while(running)
-            {
-                try{
-                    Object data = in.readObject();
-                    listener.received(data);
-                } 
-                catch(ClassNotFoundException | IOException e)
-                {
-                    e.printStackTrace();
-                }
-                catch(SocketException e)
-                {
-                    close();
-                }
-            }
-        } 
-        catch(IIOException e)
+        running = true;
+        while(running)
         {
-            e.printStackTrace();
+            try{
+                Object data = in.readObject();
+                listener.received(data);
+            }
+            catch(ClassNotFoundException | IOException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 }
