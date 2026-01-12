@@ -1,7 +1,9 @@
 
 import client.Client;
+import java.util.Scanner;
 import javax.swing.JFrame;
 import server.Server;
+
 
 public class Main {
     public static void main(String args[])
@@ -19,25 +21,35 @@ public class Main {
         window.setVisible(true);
         window.setLocationRelativeTo(null);
 
-
         gamePanel.startGameThread();
-        Server server = new Server(3080);
-        server.start();
-
-        // Client client = new Client("10.10.15.79", 3080);
-        // client.connect();
-
-        // client.sendObject("Hello World!");
-
-    }
 
 
-    public static void clientOnly(String args[])
-    {
-        Client client = new Client("10.10.15.79", 3080);
-        client.connect();
+        Scanner scanner = new Scanner(System.in);
 
-        client.sendObject("Hello World!");
+        int testCommand = scanner.nextInt();
+
+        Server server;
+
+        if(testCommand == 1)
+        {
+            server = new Server(3080);
+            server.start();
+        }
+
+
+        if(testCommand == 2)
+        {
+            Client client = new Client("10.10.15.79", 3080);
+            client.connect();
+
+            while (true) 
+            { 
+                String word = scanner.nextLine();
+                client.sendObject(word);
+            }
+        }
+
+  
     }
 }
 
