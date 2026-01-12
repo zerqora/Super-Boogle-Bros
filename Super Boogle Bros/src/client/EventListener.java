@@ -15,11 +15,11 @@ public class EventListener {
         if(p instanceof AddPlayerPacket)
         {
             AddPlayerPacket packet = (AddPlayerPacket) p;
-            PlayerHandler.players.put(packet.id, new NetPLayer(packet.id, packet.name));
+            PlayerHandler.players.put(packet.id, new NetPlayer(packet.id, packet.name));
 
             System.out.println(packet.name + " has joined the game");
         }
-        else if (p instanceof  RemovePlayerPacket)
+        else if (p instanceof RemovePlayerPacket)
         {
             RemovePlayerPacket packet = (RemovePlayerPacket) p;
 
