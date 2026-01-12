@@ -1,4 +1,6 @@
 
+import server.Server;
+
 import javax.swing.JFrame;
 
 public class Main {
@@ -19,5 +21,8 @@ public class Main {
 
 
         gamePanel.startGameThread();
+        Server server = new Server(3080);
+        server.start();
+
     }
 }
