@@ -38,7 +38,7 @@ public class Client implements Runnable
         try{
             socket = new Socket(host, port);
             out = new ObjectOutputStream(socket.getOutputStream());
-            in = new ObjectInputStream(in);
+            in = new ObjectInputStream(socket.getInputStream());
 
             listener = new EventListener();
 

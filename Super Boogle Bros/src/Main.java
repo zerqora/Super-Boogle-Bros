@@ -1,7 +1,7 @@
 
-import server.Server;
-
+import client.Client;
 import javax.swing.JFrame;
+import server.Server;
 
 public class Main {
     public static void main(String args[])
@@ -24,5 +24,23 @@ public class Main {
         Server server = new Server(3080);
         server.start();
 
+        // Client client = new Client("10.10.15.79", 3080);
+        // client.connect();
+
+        // client.sendObject("Hello World!");
+
+    }
+
+
+    public static void clientOnly(String args[])
+    {
+        Client client = new Client("10.10.15.79", 3080);
+        client.connect();
+
+        client.sendObject("Hello World!");
     }
 }
+
+
+
+

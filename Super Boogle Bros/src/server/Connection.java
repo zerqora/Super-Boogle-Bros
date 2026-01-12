@@ -32,6 +32,10 @@ public class Connection implements Runnable{
                 try{
                     // where packets come in
                     Object data = in.readObject();
+
+                    System.out.println(data);
+
+
                 }
                 catch(ClassNotFoundException e){
                     e.printStackTrace();
