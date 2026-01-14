@@ -22,11 +22,11 @@ public class Main {
         window.setLocationRelativeTo(null);
 
         gamePanel.startGameThread();
-
-
         Scanner scanner = new Scanner(System.in);
 
         int testCommand = scanner.nextInt();
+
+
 
         Server server;
 
@@ -39,7 +39,7 @@ public class Main {
 
         if(testCommand == 2)
         {
-            Client client = new Client("10.10.15.79", 3080);
+            Client client = new Client(null , 3080);
             client.connect();
 
             while (true) 
