@@ -1,13 +1,14 @@
-package client;
-
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
+import java.net.SocketException;
+import javax.imageio.IIOException;
 import packets.RemovePlayerPacket;
-import server.Connection;
+
+
 
 
 public class Client implements Runnable
@@ -21,7 +22,7 @@ public class Client implements Runnable
     private boolean running = false;
 
     private EventListener listener;
-    private Connection connection;
+
 
 
     // constructor
@@ -38,7 +39,7 @@ public class Client implements Runnable
         try{
             socket = new Socket(host, port);
             out = new ObjectOutputStream(socket.getOutputStream());
-            in = new ObjectInputStream(socket.getInputStream());
+            in = new ObjectInputStream(in);
 
             listener = new EventListener();
 
@@ -90,17 +91,28 @@ public class Client implements Runnable
     @Override
     public void run()
     {
-        running = true;
-        while(running)
-        {
-            try{
-                Object data = in.readObject();
-                listener.received(data);
-            }
-            catch(ClassNotFoundException | IOException e)
+        try{
+            running = true;
+
+            while(running)
             {
-                e.printStackTrace();
+                try{
+                    Object data = in.readObject();
+                    listener.received(data);
+                } 
+                catch(ClassNotFoundException | IOException e)
+                {
+                    e.printStackTrace();
+                }
+                catch(SocketException e)
+                {
+                    close();
+                }
             }
+        } 
+        catch(IIOException e)
+        {
+            e.printStackTrace();
         }
     }
 }

@@ -1,6 +1,9 @@
 package server;
 
+import client.Client;
+
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -10,11 +13,11 @@ public class Server implements Runnable{
     private int port; // port that the server runs on
     private boolean running = false;
     private ServerSocket serverSocket;
+    private InetAddress ipAddress;
 
-
-    public Server(int port){
+    public Server(int port, InetAddress ipAddress){
         this.port = port;
-
+        this.ipAddress = ipAddress;
         // try to make the server socket with the port provided
         try{
             serverSocket = new ServerSocket(port);
@@ -26,7 +29,7 @@ public class Server implements Runnable{
 
     public void start() {
         new Thread(this).start();
-        System.out.println("Server Started");
+        System.out.println("Server Started on the IP address " + this.ipAddress.getHostAddress());
     }
 
     @Override
@@ -49,6 +52,7 @@ public class Server implements Runnable{
     // Initialize any new connections to the server
     private void iniSocket(Socket socket) {
         Connection connection = new Connection(socket);
+        System.out.println("Connection Established");
         new Thread(connection).start();
     }
 
@@ -62,5 +66,11 @@ public class Server implements Runnable{
         catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+    public String getIpAddress(){
+        System.out.println("Hello");
+        return ipAddress.getHostAddress();
+
     }
 }
