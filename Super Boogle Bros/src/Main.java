@@ -41,7 +41,7 @@ public class Main {
 
         if(testCommand == 2)
         {
-            Client client = new Client(server.getIpAddress(), 3080);
+            Client client = new Client("10.10.166.115", 3080);
             client.connect();
 
             while (true)
