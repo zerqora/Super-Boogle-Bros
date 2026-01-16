@@ -82,6 +82,7 @@ public class Server implements Runnable{
     public void handlePackets(Object packet, Connection connection){
         if (packet instanceof AddPlayerPacket){
             System.out.println("Received Add Player Packet");
+            broadcastToAllConnections(packet);
         }
     }
 }

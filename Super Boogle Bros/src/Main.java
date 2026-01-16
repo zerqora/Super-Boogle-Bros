@@ -41,13 +41,18 @@ public class Main {
 
         if(testCommand == 2)
         {
-            Client client = new Client("10.10.166.115", 3080);
-            client.connect();
-
-            while (true)
-            {
-                String word = scanner.nextLine();
-                client.sendObject(word);
+            System.out.print("Enter the server address: ");
+            String serverAddress = scanner.next();
+            try{
+                Client client = new Client(serverAddress, 3080);
+                client.connect();
+                while (true)
+                {
+                    String word = scanner.nextLine();
+                    client.sendObject(word);
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid server address. Failed to connect.");
             }
         }
 
