@@ -5,6 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
+
+import packets.AddPlayerPacket;
 import packets.RemovePlayerPacket;
 
 
@@ -42,6 +44,9 @@ public class Client implements Runnable
 
             listener = new EventListener();
 
+            // send the packet that lets the server know a player has joined
+            out.writeObject(new AddPlayerPacket());
+
             new Thread(this).start();
         }
         catch(ConnectException e) // if no internet or server is down
@@ -73,7 +78,7 @@ public class Client implements Runnable
         }
     }
 
-    // send data to server
+    // send data to the connection
 
     public void sendObject(Object packet)
     {
@@ -96,6 +101,7 @@ public class Client implements Runnable
         while(running)
         {
             try{
+                // data coming in from the server is handled by the listener.
                 Object data = in.readObject();
                 listener.received(data);
             } 

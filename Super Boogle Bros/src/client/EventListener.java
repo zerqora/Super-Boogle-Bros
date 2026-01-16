@@ -6,7 +6,7 @@ import packets.RemovePlayerPacket;
 
 
 
-
+// Controls all the movement, inputs, and gameplay basically, by recognizing packets coming FROM the server.
 public class EventListener {
     
 

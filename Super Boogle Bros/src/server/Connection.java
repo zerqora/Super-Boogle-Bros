@@ -9,11 +9,12 @@ public class Connection implements Runnable{
     private Socket socket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
-
+    private Server server;
     private int id;
 
-    public Connection(Socket socket){
+    public Connection(Socket socket, Server server){
         this.socket = socket;
+        this.server = server;
         id = 0;
         try{
             out = new ObjectOutputStream(socket.getOutputStream());
@@ -33,7 +34,7 @@ public class Connection implements Runnable{
                     // where packets come in
                     Object data = in.readObject();
 
-                    System.out.println(data);
+                    server.handlePackets(data, this);
 
 
                 }
@@ -57,7 +58,7 @@ public class Connection implements Runnable{
         }
     }
 
-    // Send packets
+    // Send packets to client
     public void sendObject(Object packet){
         try{
             out.writeObject(packet);

@@ -1,11 +1,12 @@
 package server;
 
-import client.Client;
+import packets.AddPlayerPacket;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Server implements Runnable{
 
@@ -14,6 +15,8 @@ public class Server implements Runnable{
     private boolean running = false;
     private ServerSocket serverSocket;
     private InetAddress ipAddress;
+
+    private ArrayList<Connection> connections = new ArrayList<>();
 
     public Server(int port, InetAddress ipAddress){
         this.port = port;
@@ -37,6 +40,7 @@ public class Server implements Runnable{
         running = true;
         while(running){
             try{
+                // accept the new socket and establish a new connection
                 Socket socket = serverSocket.accept();
                 iniSocket(socket);
             }
@@ -51,8 +55,9 @@ public class Server implements Runnable{
 
     // Initialize any new connections to the server
     private void iniSocket(Socket socket) {
-        Connection connection = new Connection(socket);
+        Connection connection = new Connection(socket, this);
         System.out.println("Connection Established");
+        connections.add(connection);
         new Thread(connection).start();
     }
 
@@ -67,10 +72,16 @@ public class Server implements Runnable{
             e.printStackTrace();
         }
     }
+    private void broadcastToAllConnections(Object packet){
+        for(Connection connection : connections){
+            connection.sendObject(packet);
+        }
+    }
 
-    public String getIpAddress(){
-        System.out.println("Hello");
-        return ipAddress.getHostAddress();
-
+    // where packets come in from one connection.
+    public void handlePackets(Object packet, Connection connection){
+        if (packet instanceof AddPlayerPacket){
+            System.out.println("Received Add Player Packet");
+        }
     }
 }
