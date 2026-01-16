@@ -84,5 +84,6 @@ public class Server implements Runnable{
             System.out.println("Received Add Player Packet");
             broadcastToAllConnections(packet);
         }
+        System.out.println(packet);
     }
 }
