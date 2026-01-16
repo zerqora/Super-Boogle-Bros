@@ -1,6 +1,8 @@
 package server;
 
 import packets.AddPlayerPacket;
+import packets.NewChatPacket;
+import packets.RemovePlayerPacket;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -82,6 +84,9 @@ public class Server implements Runnable{
     public void handlePackets(Object packet, Connection connection){
         if (packet instanceof AddPlayerPacket){
             System.out.println("Received Add Player Packet");
+            broadcastToAllConnections(packet);
+        }
+        if (packet instanceof NewChatPacket){
             broadcastToAllConnections(packet);
         }
         System.out.println(packet);

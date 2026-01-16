@@ -103,6 +103,7 @@ public class Client implements Runnable
             try{
                 // data coming in from the server is handled by the listener.
                 Object data = in.readObject();
+                System.out.println(data);
                 listener.received(data);
             } 
             catch(ClassNotFoundException | IOException e)

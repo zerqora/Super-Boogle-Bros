@@ -7,8 +7,8 @@
     <list default="true" id="9f86683f-0d0c-4cfc-b8d7-754056dfa253" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Super Boogle Bros/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Super Boogle Bros/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Boogle Bros/src/packets/NewChatPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/Super Boogle Bros/src/packets/NewChatPacket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Super Boogle Bros/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Super Boogle Bros/src/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/server/Server.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -5,6 +5,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 import javax.swing.JFrame;
+
+import packets.NewChatPacket;
 import server.Server;
 
 
@@ -49,7 +51,7 @@ public class Main {
                 while (true)
                 {
                     String word = scanner.nextLine();
-                    client.sendObject(word);
+                    client.sendObject(new NewChatPacket(word));
                 }
             } catch (Exception e) {
                 System.out.println("Invalid server address. Failed to connect.");
