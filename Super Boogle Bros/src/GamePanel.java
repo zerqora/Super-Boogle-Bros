@@ -1,6 +1,8 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements Runnable
@@ -27,10 +29,52 @@ public class GamePanel extends JPanel implements Runnable
         gameThread.start();
     }
 
+
+    int fps = 60;
+    double delta;
+    double interval = 1e9 / fps; // nanoseconds in a second / fps
+    long lastTime;
+    long currentTime;
+
     @Override
     public void run()
     {
 
+        delta = 0;
+        lastTime = System.nanoTime();
+
+        while(gameThread != null)
+        {
+
+            currentTime = System.nanoTime();
+            delta += (currentTime - lastTime) / interval;
+            lastTime = currentTime;
+
+            if(delta >= 1)
+            {
+                update();
+                repaint();
+                delta--;
+            }
+        }
+    }
+
+
+    public void update()
+    {
+        
+    }
+
+    @Override
+    public void paintComponent(Graphics graphic)
+    {
+
+        super.paintComponent(graphic);
+        Graphics2D graphic2D = (Graphics2D) graphic;
+
+        // class.draw(graphic2D), in the class, draw g2.drawImage(image, x, y, width, height)
+
+        graphic2D.dispose();
     }
 }
 
