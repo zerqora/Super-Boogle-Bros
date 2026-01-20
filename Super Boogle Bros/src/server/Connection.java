@@ -9,10 +9,10 @@ public class Connection implements Runnable{
     private Socket socket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
-    private Server server;
+    private TcpServer server;
     private int id;
 
-    public Connection(Socket socket, Server server){
+    public Connection(Socket socket, TcpServer server){
         this.socket = socket;
         this.server = server;
         id = 0;
@@ -33,7 +33,7 @@ public class Connection implements Runnable{
                 try{
                     // where packets come in
                     Object data = in.readObject();
-
+                    //System.out.println("Receiving data " + data);
                     server.handlePackets(data, this);
 
 

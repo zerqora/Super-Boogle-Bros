@@ -2,7 +2,6 @@ package server;
 
 import packets.AddPlayerPacket;
 import packets.NewChatPacket;
-import packets.RemovePlayerPacket;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -10,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Server implements Runnable{
+public class TcpServer implements Runnable{
 
 
     private int port; // port that the server runs on
@@ -20,7 +19,7 @@ public class Server implements Runnable{
 
     private ArrayList<Connection> connections = new ArrayList<>();
 
-    public Server(int port, InetAddress ipAddress){
+    public TcpServer(int port, InetAddress ipAddress){
         this.port = port;
         this.ipAddress = ipAddress;
         // try to make the server socket with the port provided
@@ -87,6 +86,7 @@ public class Server implements Runnable{
             broadcastToAllConnections(packet);
         }
         if (packet instanceof NewChatPacket){
+            System.out.println("Received New Chat Packet");
             broadcastToAllConnections(packet);
         }
         System.out.println(packet);

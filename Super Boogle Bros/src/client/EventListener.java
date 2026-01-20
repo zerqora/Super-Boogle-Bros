@@ -2,6 +2,7 @@ package client;
 
 
 import packets.AddPlayerPacket;
+import packets.MovementPacket;
 import packets.RemovePlayerPacket;
 
 

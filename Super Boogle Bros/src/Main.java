@@ -2,16 +2,18 @@
 import client.Client;
 
 import java.net.InetAddress;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 import javax.swing.JFrame;
 
 import packets.NewChatPacket;
-import server.Server;
+import server.TcpServer;
+import server.UdpServer;
 
 
 public class Main {
-    public static void main(String args[]) throws UnknownHostException {
+    public static void main(String args[]) throws UnknownHostException, SocketException {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
@@ -32,12 +34,14 @@ public class Main {
 
         int testCommand = scanner.nextInt();
 
-        Server server = null;
-
+        TcpServer tcpServer = null;
+        UdpServer udpServer = null;
         if(testCommand == 1)
         {
-            server = new Server(3080, InetAddress.getLocalHost());
-            server.start();
+            tcpServer = new TcpServer(3080, InetAddress.getLocalHost());
+            udpServer = new UdpServer(3080);
+            tcpServer.start();
+            udpServer.start();
         }
 
 

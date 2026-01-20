@@ -1,5 +1,7 @@
 package client;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -7,12 +9,13 @@ import java.net.ConnectException;
 import java.net.Socket;
 
 import packets.AddPlayerPacket;
+import packets.MovementPacket;
 import packets.RemovePlayerPacket;
 
 
 
 
-public class Client implements Runnable
+public class Client implements Runnable, KeyListener
 {
     private String host;
     private int port;
@@ -85,6 +88,7 @@ public class Client implements Runnable
 
         try{
             out.writeObject(packet);
+            //System.out.println("Sending " + packet + " from the client to the connection.");
         } 
         catch(IOException e)
         {
@@ -114,5 +118,21 @@ public class Client implements Runnable
         }
         
         
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        return;
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+        sendObject(new MovementPacket());
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }
