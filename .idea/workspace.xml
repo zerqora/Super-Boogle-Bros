@@ -5,16 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f86683f-0d0c-4cfc-b8d7-754056dfa253" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Super Boogle Bros/src/packets/MovementPacket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Super Boogle Bros/src/server/UdpServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Super Boogle Bros/src/client/UdpClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Super Boogle Bros/src/client/UdpPacketWriter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Super Boogle Bros/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Super Boogle Bros/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Super Boogle Bros/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Super Boogle Bros/src/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Super Boogle Bros/src/client/EventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/Super Boogle Bros/src/client/EventListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Super Boogle Bros/src/server/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Super Boogle Bros/src/server/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Super Boogle Bros/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Super Boogle Bros/src/server/TcpServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Boogle Bros/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Super Boogle Bros/src/client/TcpClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Super Boogle Bros/src/packets/MovementPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/Super Boogle Bros/src/packets/MovementPacket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/GamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/GamePanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/client/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/client/EventListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/client/EventListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/server/Connection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/server/Connection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Super-Boogle-Bros/server/Server.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

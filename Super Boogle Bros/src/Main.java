@@ -1,5 +1,5 @@
 
-import client.Client;
+import client.TcpClient;
 
 import java.net.InetAddress;
 import java.net.SocketException;
@@ -50,7 +50,7 @@ public class Main {
             System.out.print("Enter the server address: ");
             String serverAddress = scanner.next();
             try{
-                Client client = new Client(serverAddress, 3080);
+                TcpClient client = new TcpClient(serverAddress, 3080);
                 client.connect();
                 while (true)
                 {

@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 public class MovementPacket implements Serializable {
     private static final long serialVersionUID = 1L;
-    int[] desiredVelocity;
+    int[] desiredVelocity; // x, y
     public MovementPacket(int[] desiredVelocity) {
         this.desiredVelocity = desiredVelocity;
+
     }
 }
