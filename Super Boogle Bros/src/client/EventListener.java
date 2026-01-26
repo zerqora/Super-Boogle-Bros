@@ -2,11 +2,10 @@ package client;
 
 
 import packets.AddPlayerPacket;
-import packets.MovementPacket;
 import packets.RemovePlayerPacket;
 
 
-
+// TCP Orientated
 // Controls all the movement, inputs, and gameplay basically, by recognizing packets coming FROM the server.
 public class EventListener {
     

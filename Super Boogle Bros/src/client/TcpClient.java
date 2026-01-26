@@ -9,9 +9,6 @@ import java.net.Socket;
 import packets.AddPlayerPacket;
 import packets.RemovePlayerPacket;
 
-
-
-
 public class TcpClient implements Runnable
 {
     private String host;

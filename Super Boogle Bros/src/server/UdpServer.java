@@ -3,6 +3,7 @@ package server;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.Arrays;
 
@@ -10,11 +11,14 @@ public class UdpServer implements Runnable {
 
     // Every packet is sent to this socket.
     DatagramSocket socket;
-
+    int serverPort;
+    InetAddress serverAddress;
     byte[] buffer = new byte[1024];
 
-    public UdpServer(int port) throws SocketException {
+    public UdpServer(int port, InetAddress serverIP) throws SocketException {
         socket = new DatagramSocket(port);
+        this.serverPort = port;
+        this.serverAddress = serverIP;
     }
     @Override
     public void run() {

@@ -1,43 +1,40 @@
 package client;
 
-import packets.MovementPacket;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+public class UdpClient {
+    // Notice how the UDP client doesn't hold who this belongs to. Each packet should have the player ID be sent with the byte array.
+    private InetAddress serverIP;
+    private int serverPort;
+    private DatagramSocket socket;
 
-public class UdpClient implements Runnable, KeyListener {
-    int[] desiredVelocity = new int[2];
-    public UdpClient() {
-
-    }
-    @Override
-    public void keyTyped(KeyEvent e) {
-        return;
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-
-        if (keyCode == KeyEvent.VK_A){
-            desiredVelocity[0] = -1;
+    public UdpClient(InetAddress serverIP, int serverPort) {
+        try{
+            this.serverIP = serverIP;
+            this.serverPort = serverPort;
+            this.socket = new DatagramSocket(serverPort, serverIP);
+        } catch (SocketException e) {
+            throw new RuntimeException(e);
         }
-        if (keyCode == KeyEvent.VK_D){
-            desiredVelocity[0] = 1;
+    }
+
+    public void start() {
+        System.out.println("Starting Udp Client\nIP Address: " + serverIP.getHostName() + "\nServer Port: " + serverPort);
+    }
+
+    public void sendPacket(byte[] packet) {
+        // take the byte array and turn it into an actual packet that can be read by the UDP server
+        DatagramPacket datagramPacket = new DatagramPacket(packet, packet.length, serverIP, serverPort);
+        try{
+            socket.send(datagramPacket);
         }
-        if (keyCode == KeyEvent.VK_SPACE){
-            desiredVelocity[1] = -1;
+        catch(IOException e){
+            throw new RuntimeException();
         }
-        //sendObject(new MovementPacket(desiredVelocity));
     }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
-
-    @Override
-    public void run() {
-
-    }
 }

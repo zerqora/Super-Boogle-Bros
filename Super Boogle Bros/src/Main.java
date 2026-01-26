@@ -7,6 +7,7 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 import javax.swing.JFrame;
 
+import client.UdpClient;
 import packets.NewChatPacket;
 import server.TcpServer;
 import server.UdpServer;
@@ -39,7 +40,7 @@ public class Main {
         if(testCommand == 1)
         {
             tcpServer = new TcpServer(3080, InetAddress.getLocalHost());
-            udpServer = new UdpServer(3080);
+            udpServer = new UdpServer(3081, InetAddress.getLocalHost());
             tcpServer.start();
             udpServer.start();
         }
@@ -51,7 +52,9 @@ public class Main {
             String serverAddress = scanner.next();
             try{
                 TcpClient client = new TcpClient(serverAddress, 3080);
+                UdpClient udpClient = new UdpClient(InetAddress.getByName(serverAddress), 3081);
                 client.connect();
+                udpClient.start();
                 while (true)
                 {
                     String word = scanner.nextLine();
