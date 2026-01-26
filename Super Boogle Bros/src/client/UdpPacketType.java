@@ -4,8 +4,9 @@ package client;
 
 // Initialized as the FIRST byte of data in a packet.
 public enum UdpPacketType {
-    SPAWN,
-    DESPAWN,
-    MOVE,
-    POSITION
+    SPAWN, // 0
+    DESPAWN, // 1
+    MOVE, // 2 and so on
+    POSITION,
+    HITBOX_TRIGGERED
 }
