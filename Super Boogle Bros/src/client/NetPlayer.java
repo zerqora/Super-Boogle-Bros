@@ -16,8 +16,6 @@ public class NetPlayer {
     {
         this.id = id;
         this.name = name;
-
-        
     }
 
     public NetPlayer()
@@ -29,8 +27,6 @@ public class NetPlayer {
         height = 64f;
     }
 
-
-
     public NetPlayer(float posX, float posY, float width, float height)
     {
         this.posX = posX;
@@ -40,9 +36,18 @@ public class NetPlayer {
         this.height = height;
     }
 
+    public void setPosition(float posX, float posY)
+    {
+        this.posX = posX;
+        this.posY = posY;
+    }
 
 
+    
+    public void update()
+    {
 
+    }
 
     public void draw(Graphics2D g2)
     {
@@ -52,18 +57,9 @@ public class NetPlayer {
             BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/greatimages/TestGuy.png"));
             g2.drawImage(image, (int) posX, (int) posY, (int) width, (int) height, null);
         } 
-        catch (Exception e) 
-        {
-
-        }
+        catch (Exception e) {}
     }
 
-    public void setPosition(float posX, float posY)
-    {
-        this.posX = posX;
-        this.posY = posY;
-    }
-
-
+    
 }
 
