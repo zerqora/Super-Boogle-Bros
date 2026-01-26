@@ -1,5 +1,6 @@
 package client;
 
+<<<<<<< Updated upstream
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -37,4 +38,17 @@ public class UdpClient {
         }
     }
 
+=======
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class UdpClient{
+    int[] desiredVelocity = new int[2];
+    public UdpClient() {
+
+    }
+    
+
+   
+>>>>>>> Stashed changes
 }

@@ -12,7 +12,7 @@ public class GamePanel extends JPanel implements Runnable
     private Thread gameThread;
     KeyHandler keyH = new KeyHandler();
 
-    Netplayer player = new NetPlayer();
+    NetPlayer player = new NetPlayer(0, "");
 
     public GamePanel()
     {

@@ -20,6 +20,7 @@ public class UdpServer implements Runnable {
         this.serverPort = port;
         this.serverAddress = serverIP;
     }
+    
     @Override
     public void run() {
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
