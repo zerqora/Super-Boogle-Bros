@@ -4,9 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 // Every client has their own input handler. The input handler decides whether to send it to the UDP client or TCP client
 public class InputHandler implements KeyListener {
-
-    public InputHandler() {
-
+    private int playerID;
+    public InputHandler(int playerID) {
+        this.playerID = playerID;
     }
     @Override
     public void keyTyped(KeyEvent e) {
@@ -26,7 +26,7 @@ public class InputHandler implements KeyListener {
         if (keyCode == KeyEvent.VK_SPACE){
             desiredVelocity[1] = -1;
         }
-        //sendObject(new MovementPacket(desiredVelocity));
+        UdpPacketWriter.newMovementPacket(playerID, desiredVelocity[0], desiredVelocity[1]);
     }
 
     @Override
