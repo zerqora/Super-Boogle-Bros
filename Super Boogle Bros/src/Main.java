@@ -1,15 +1,11 @@
 
 import client.TcpClient;
+import client.UdpClient;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 import javax.swing.JFrame;
-<<<<<<< Updated upstream
-
-import client.UdpClient;
-=======
->>>>>>> Stashed changes
 import packets.NewChatPacket;
 import server.TcpServer;
 import server.UdpServer;

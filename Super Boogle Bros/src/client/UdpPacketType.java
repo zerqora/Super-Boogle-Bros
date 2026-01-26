@@ -8,5 +8,5 @@ public enum UdpPacketType {
     DESPAWN, // 1
     MOVE, // 2 and so on
     POSITION,
-    HITBOX_TRIGGERED
+    HITBOX
 }
