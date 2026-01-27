@@ -10,7 +10,7 @@ public class GamePanel extends JPanel implements Runnable
 {
     
     private Thread gameThread;
-    KeyHandler keyH = new KeyHandler();
+    //KeyHandler keyH = new KeyHandler(); this may be archaic 
 
     NetPlayer player = new NetPlayer(0, "");
 
@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
 
-        this.addKeyListener(keyH);
+        //this.addKeyListener(keyH);
         this.setFocusable(true);
 
 
