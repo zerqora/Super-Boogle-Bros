@@ -1,16 +1,10 @@
 
-import client.GamePanel;
-import client.InputHandler;
-import client.TcpClient;
-import client.UdpClient;
+import client.Client;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 import javax.swing.JFrame;
-
-
-import client.UdpClient;
 import packets.NewChatPacket;
 import server.TcpServer;
 import server.UdpServer;
@@ -34,41 +28,54 @@ public class Main {
             udpServer.start();
         }
 
-
+        testCommand = scanner.nextInt();
         if(testCommand == 2)
         {
             System.out.print("Enter the server address: ");
             String serverAddress = scanner.next();
             try{
+
+                Client client = new Client(serverAddress);
+
+
+                client.connectSockets();
+                
+
+                /* 
                 TcpClient client = new TcpClient(serverAddress, 3080);
                 UdpClient udpClient = new UdpClient(InetAddress.getByName(serverAddress), 3080);
 
                 client.connect();
                 udpClient.start();
+                */
+
 
                 JFrame window = new JFrame();
                 window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 window.setResizable(false);
-                window.setTitle("Test1");
+                window.setTitle("BOOOOGLE YOOOOO");
 
-                GamePanel gamePanel = new GamePanel();
-                window.add(gamePanel);
+                window.add(client.gamePanel);
 
                 window.pack();
 
                 window.setVisible(true);
                 window.setLocationRelativeTo(null);
 
-                gamePanel.startGameThread();
+                client.gamePanel.startGameThread();
 
                 while (true)
                 {
                     String word = scanner.nextLine();
-                    client.sendObject(new NewChatPacket(word));
+                    client.sendObjectTcp(new NewChatPacket(word));
                 }
+
+                
             } catch (Exception e) {
                 System.out.println("Invalid server address. Failed to connect.");
             }
+
+            
         }
 
 

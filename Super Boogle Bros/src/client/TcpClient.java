@@ -5,7 +5,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
-
 import packets.AddPlayerPacket;
 import packets.RemovePlayerPacket;
 
@@ -21,9 +20,19 @@ public class TcpClient implements Runnable
 
     private EventListener listener;
 
+    public Client client;
+
     // constructor
     public TcpClient(String host, int port)
     {
+        this.client = null;
+        this.host = host;
+        this.port = port;
+    }
+
+    public TcpClient(Client client, String host, int port)
+    {
+        this.client = client;
         this.host = host;
         this.port = port;
     }

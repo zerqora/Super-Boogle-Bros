@@ -1,13 +1,37 @@
 package client;
 
+import java.net.InetAddress;
+
 public class Client 
 {
-    TcpClient tcpClient = new TcpClient(null, 0); //host port
-    UdpClient udpClient = new UdpClient(null, 0); // serverIP serverPort
-    GamePanel gamePanel = new GamePanel();
+    public TcpClient tcpClient;
+    public UdpClient udpClient;
+    public GamePanel gamePanel;
 
-    public Client()
+    public Client(String serverAddress)
     {
+        try{
 
+            tcpClient = new TcpClient(this, serverAddress, 3080); //initialize both connections to the server as well as the gamepanel
+            udpClient = new UdpClient(this, InetAddress.getByName(serverAddress), 3080);
+            gamePanel = new GamePanel(this);
+
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    //connect to both servers
+    public void connectSockets()
+    {
+        tcpClient.connect();
+        udpClient.start();
+    }
+
+    public void sendObjectTcp(Object packet)
+    {
+        tcpClient.sendObject(packet);
     }
 }

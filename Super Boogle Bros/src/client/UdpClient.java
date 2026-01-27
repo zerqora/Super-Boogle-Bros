@@ -12,7 +12,21 @@ public class UdpClient {
     private int serverPort;
     private DatagramSocket socket;
 
+    public Client client;
+
     public UdpClient(InetAddress serverIP, int serverPort) {
+        this.client = null;
+        try{
+            this.serverIP = serverIP;
+            this.serverPort = serverPort;
+            this.socket = new DatagramSocket(serverPort, serverIP);
+        } catch (SocketException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public UdpClient(Client client, InetAddress serverIP, int serverPort) {
+        this.client = client;
         try{
             this.serverIP = serverIP;
             this.serverPort = serverPort;

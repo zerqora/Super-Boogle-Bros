@@ -10,12 +10,15 @@ public class GamePanel extends JPanel implements Runnable
 {
     
     private Thread gameThread;
-    InputHandler inputHandler = new InputHandler();
+    //InputHandler inputHandler = new InputHandler(); fsdouibnwrkghwrgnviwrughwkejghwruiw
 
+    Client client;
     NetPlayer player = new NetPlayer(0, "");
 
-    public GamePanel()
+    public GamePanel(Client client)
     {
+        this.client = client;
+
         this.setPreferredSize(new Dimension((int)1000, (int)1000));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
