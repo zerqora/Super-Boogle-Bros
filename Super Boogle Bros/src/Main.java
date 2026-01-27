@@ -1,15 +1,15 @@
 
+import client.GamePanel;
+import client.InputHandler;
 import client.TcpClient;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 import javax.swing.JFrame;
-<<<<<<< Updated upstream
+
 
 import client.UdpClient;
-=======
->>>>>>> Stashed changes
 import packets.NewChatPacket;
 import server.TcpServer;
 import server.UdpServer;
@@ -17,20 +17,6 @@ import server.UdpServer;
 
 public class Main {
     public static void main(String args[]) throws UnknownHostException, SocketException {
-        JFrame window = new JFrame();
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        window.setTitle("Test1");
-
-        GamePanel gamePanel = new GamePanel();
-        window.add(gamePanel);
-
-        window.pack();
-
-        window.setVisible(true);
-        window.setLocationRelativeTo(null);
-
-        gamePanel.startGameThread();
 
 
         Scanner scanner = new Scanner(System.in);
@@ -54,9 +40,26 @@ public class Main {
             String serverAddress = scanner.next();
             try{
                 TcpClient client = new TcpClient(serverAddress, 3080);
-                UdpClient udpClient = new UdpClient(InetAddress.getByName(serverAddress), 3081);
+                UdpClient udpClient = new UdpClient(InetAddress.getByName(serverAddress), 3080);
+
                 client.connect();
                 udpClient.start();
+
+                JFrame window = new JFrame();
+                window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                window.setResizable(false);
+                window.setTitle("Test1");
+
+                GamePanel gamePanel = new GamePanel();
+                window.add(gamePanel);
+
+                window.pack();
+
+                window.setVisible(true);
+                window.setLocationRelativeTo(null);
+
+                gamePanel.startGameThread();
+
                 while (true)
                 {
                     String word = scanner.nextLine();

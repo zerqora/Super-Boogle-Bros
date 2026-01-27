@@ -1,5 +1,5 @@
+package client;
 
-import client.NetPlayer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -10,7 +10,7 @@ public class GamePanel extends JPanel implements Runnable
 {
     
     private Thread gameThread;
-    KeyHandler keyH = new KeyHandler();
+    InputHandler inputHandler = new InputHandler();
 
     NetPlayer player = new NetPlayer(0, "");
 

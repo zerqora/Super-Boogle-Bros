@@ -31,6 +31,7 @@ public class UdpClient {
         DatagramPacket datagramPacket = new DatagramPacket(packet, packet.length, serverIP, serverPort);
         try{
             socket.send(datagramPacket);
+            System.out.println("Sent packet with type " + datagramPacket + " to " + datagramPacket.getAddress().getHostName());
         }
         catch(IOException e){
             throw new RuntimeException();
