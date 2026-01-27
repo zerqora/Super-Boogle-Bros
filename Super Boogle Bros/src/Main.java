@@ -2,6 +2,7 @@
 import client.GamePanel;
 import client.InputHandler;
 import client.TcpClient;
+import client.UdpClient;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;

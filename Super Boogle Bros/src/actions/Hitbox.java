@@ -7,14 +7,14 @@ public class Hitbox
     
     // offsets from the origin of the player (top left corner)
 
-    float offsetX, offsetY;
-    int width, height;
+    public float offsetX, offsetY;
+    public int width, height;
 
-    float damage;
-    float knockback;
-    float angle;
+    public float damage;
+    public float knockback;
+    public float angle;
 
-    Rectangle hitbox;
+    public Rectangle.Float hitbox;
 
 
     public Hitbox(float offsetX, float offsetY, int width, int height, float damage, float knockback, float angle)
@@ -25,7 +25,7 @@ public class Hitbox
         this.width = width;
         this.height = height;
 
-        this.hitbox = new Rectangle(1, 1); // WORK HERE MAKE THIS RIGHT I KINNNNDA FORGOT HOW
+        this.hitbox = new Rectangle.Float(offsetX, offsetY, width, height); // WORK HERE MAKE THIS RIGHT I KINNNNDA FORGOT HOW
 
         this.damage = damage;
         this.knockback = knockback;

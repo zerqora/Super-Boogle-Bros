@@ -66,6 +66,7 @@ public class GamePanel extends JPanel implements Runnable
     public void update()
     {
         
+        // take in from udp
     }
 
     @Override
