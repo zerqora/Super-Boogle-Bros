@@ -7,6 +7,7 @@ public class Client
     public TcpClient tcpClient;
     public UdpClient udpClient;
     public GamePanel gamePanel;
+    public InputHandler inputHandler;
 
     public Client(String serverAddress)
     {
@@ -15,6 +16,9 @@ public class Client
             tcpClient = new TcpClient(this, serverAddress, 3080); //initialize both connections to the server as well as the gamepanel
             udpClient = new UdpClient(this, InetAddress.getByName(serverAddress), 3080);
             gamePanel = new GamePanel(this);
+            inputHandler = new InputHandler(this);
+
+            gamePanel.addNewListener(inputHandler);
 
         }
         catch(Exception e)
@@ -33,5 +37,8 @@ public class Client
     public void sendObjectTcp(Object packet)
     {
         tcpClient.sendObject(packet);
+    }
+    public void sendPacketUdp(byte[] packet){
+        udpClient.sendPacket(packet);
     }
 }

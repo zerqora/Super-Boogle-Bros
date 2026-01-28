@@ -23,12 +23,12 @@ public class Main {
         if(testCommand == 1)
         {
             tcpServer = new TcpServer(3080, InetAddress.getLocalHost());
-            udpServer = new UdpServer(3081, InetAddress.getLocalHost());
+            udpServer = new UdpServer(InetAddress.getLocalHost());
             tcpServer.start();
             udpServer.start();
+            System.out.println("Type 2 if you would like to create a client for yourself. ");
+            testCommand = scanner.nextInt();
         }
-
-        testCommand = scanner.nextInt();
         if(testCommand == 2)
         {
             System.out.print("Enter the server address: ");

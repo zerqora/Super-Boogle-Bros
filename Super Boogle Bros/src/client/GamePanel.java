@@ -22,13 +22,11 @@ public class GamePanel extends JPanel implements Runnable
         this.setPreferredSize(new Dimension((int)1000, (int)1000));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
-
-        //this.addKeyListener(keyH);
-        this.setFocusable(true);
-
-
     }
-
+    public void addNewListener(InputHandler inputHandler){
+        this.addKeyListener(inputHandler);
+        this.setFocusable(true);
+    }
     public void startGameThread()
     {
         gameThread = new Thread(this);

@@ -1,26 +1,22 @@
 package client;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
+import java.net.*;
 
 public class UdpClient {
     // Notice how the UDP client doesn't hold who this belongs to. Each packet should have the player ID be sent with the byte array.
+    private DatagramSocket socket;
     private InetAddress serverIP;
     private int serverPort;
-    private DatagramSocket socket;
-
     public Client client;
 
     public UdpClient(InetAddress serverIP, int serverPort) {
         this.client = null;
         try{
-            this.serverIP = serverIP;
+            this.serverIP = InetAddress.getByName("127.0.0.1");
             this.serverPort = serverPort;
-            this.socket = new DatagramSocket(serverPort, serverIP);
-        } catch (SocketException e) {
+            this.socket = new DatagramSocket();
+        } catch (SocketException | UnknownHostException e) {
             throw new RuntimeException(e);
         }
     }
@@ -28,16 +24,16 @@ public class UdpClient {
     public UdpClient(Client client, InetAddress serverIP, int serverPort) {
         this.client = client;
         try{
-            this.serverIP = serverIP;
+            this.serverIP = InetAddress.getByName("127.0.0.1");
             this.serverPort = serverPort;
-            this.socket = new DatagramSocket(serverPort, serverIP);
-        } catch (SocketException e) {
+            this.socket = new DatagramSocket();
+        } catch (SocketException | UnknownHostException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void start() {
-        System.out.println("Starting Udp Client\nIP Address: " + serverIP.getHostName() + "\nServer Port: " + serverPort);
+        System.out.println("Starting Udp Client");
     }
 
     public void sendPacket(byte[] packet) {

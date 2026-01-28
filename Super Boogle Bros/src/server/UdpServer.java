@@ -15,22 +15,37 @@ public class UdpServer implements Runnable {
     InetAddress serverAddress;
     byte[] buffer = new byte[1024];
 
-    public UdpServer(int port, InetAddress serverIP) throws SocketException {
-        socket = new DatagramSocket(port);
-        this.serverPort = port;
+    public UdpServer(InetAddress serverIP) throws SocketException {
+        socket = new DatagramSocket(7777);
+        this.serverPort = 7777;
         this.serverAddress = serverIP;
     }
     
     @Override
     public void run() {
+        System.out.println("UDP Server listening on port " + serverPort);
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-        while(true){
-            // is blocked until it receives a packet
+        while (true) {
             try {
-                socket.receive(packet);
-                System.out.println("Received packet via UDP Server: " + Arrays.toString(packet.getData()));
+                socket.receive(packet); // BLOCKS
+
+                int length = packet.getLength();
+                byte[] data = Arrays.copyOf(packet.getData(), length);
+
+                InetAddress senderAddress = packet.getAddress();
+                int senderPort = packet.getPort();
+
+                System.out.println(
+                        "Received UDP packet from " +
+                                senderAddress.getHostAddress() +
+                                ":" + senderPort +
+                                " -> " + Arrays.toString(data)
+                );
+
+                //handlePacket(data, senderAddress, senderPort);
+
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         }
     }
