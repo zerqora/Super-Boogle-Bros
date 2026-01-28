@@ -18,8 +18,9 @@ public class Main {
 
         int testCommand = scanner.nextInt();
 
-        TcpServer tcpServer = null;
-        UdpServer udpServer = null;
+        TcpServer tcpServer;
+        UdpServer udpServer;
+        
         if(testCommand == 1)
         {
             tcpServer = new TcpServer(3080, InetAddress.getLocalHost());
@@ -37,10 +38,8 @@ public class Main {
 
                 Client client = new Client(serverAddress);
 
-
                 client.connectSockets();
                 
-
                 /* 
                 TcpClient client = new TcpClient(serverAddress, 3080);
                 UdpClient udpClient = new UdpClient(InetAddress.getByName(serverAddress), 3080);

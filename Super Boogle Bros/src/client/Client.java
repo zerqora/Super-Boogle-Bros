@@ -38,6 +38,7 @@ public class Client
     {
         tcpClient.sendObject(packet);
     }
+    
     public void sendPacketUdp(byte[] packet){
         udpClient.sendPacket(packet);
     }
