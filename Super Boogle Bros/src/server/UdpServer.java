@@ -1,10 +1,7 @@
 package server;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
+import java.net.*;
 import java.util.Arrays;
 
 public class UdpServer implements Runnable {
@@ -24,9 +21,10 @@ public class UdpServer implements Runnable {
     @Override
     public void run() {
         System.out.println("UDP Server listening on port " + serverPort);
-        DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+
         while (true) {
             try {
+                DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packet); // BLOCKS
 
                 int length = packet.getLength();

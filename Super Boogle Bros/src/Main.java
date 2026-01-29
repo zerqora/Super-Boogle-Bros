@@ -18,13 +18,12 @@ public class Main {
 
         int testCommand = scanner.nextInt();
 
-        TcpServer tcpServer;
-        UdpServer udpServer;
-        
+        TcpServer tcpServer = null;
+        UdpServer udpServer = null;
         if(testCommand == 1)
         {
             tcpServer = new TcpServer(3080, InetAddress.getLocalHost());
-            udpServer = new UdpServer(InetAddress.getLocalHost());
+            udpServer = new UdpServer(InetAddress.getByName("127.0.0.1"));
             tcpServer.start();
             udpServer.start();
             System.out.println("Type 2 if you would like to create a client for yourself. ");
@@ -38,8 +37,10 @@ public class Main {
 
                 Client client = new Client(serverAddress);
 
+
                 client.connectSockets();
                 
+
                 /* 
                 TcpClient client = new TcpClient(serverAddress, 3080);
                 UdpClient udpClient = new UdpClient(InetAddress.getByName(serverAddress), 3080);

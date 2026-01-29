@@ -10,24 +10,13 @@ public class UdpClient {
     private int serverPort;
     public Client client;
 
-    public UdpClient(InetAddress serverIP, int serverPort) {
-        this.client = null;
-        try{
-            this.serverIP = InetAddress.getByName("127.0.0.1");
-            this.serverPort = serverPort;
-            this.socket = new DatagramSocket();
-        } catch (SocketException | UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public UdpClient(Client client, InetAddress serverIP, int serverPort) {
         this.client = client;
         try{
-            this.serverIP = InetAddress.getByName("127.0.0.1");
+            this.serverIP = serverIP;
             this.serverPort = serverPort;
             this.socket = new DatagramSocket();
-        } catch (SocketException | UnknownHostException e) {
+        } catch (SocketException e) {
             throw new RuntimeException(e);
         }
     }

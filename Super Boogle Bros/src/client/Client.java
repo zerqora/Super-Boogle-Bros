@@ -14,7 +14,7 @@ public class Client
         try{
 
             tcpClient = new TcpClient(this, serverAddress, 3080); //initialize both connections to the server as well as the gamepanel
-            udpClient = new UdpClient(this, InetAddress.getByName(serverAddress), 3080);
+            udpClient = new UdpClient(this, InetAddress.getByName("127.0.0.1"), 7777);
             gamePanel = new GamePanel(this);
             inputHandler = new InputHandler(this);
 
@@ -38,7 +38,6 @@ public class Client
     {
         tcpClient.sendObject(packet);
     }
-    
     public void sendPacketUdp(byte[] packet){
         udpClient.sendPacket(packet);
     }
