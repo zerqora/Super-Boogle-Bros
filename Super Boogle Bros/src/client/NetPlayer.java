@@ -20,8 +20,8 @@ public class NetPlayer {
 
     public NetPlayer()
     {
-        posX = 150f;
-        posY = 150f;
+        posX = 0;
+        posY = 0;
 
         width = 64f;
         height = 64f;

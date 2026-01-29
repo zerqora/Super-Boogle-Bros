@@ -15,7 +15,7 @@ public class EventListener {
         if(p instanceof AddPlayerPacket)
         {
             AddPlayerPacket packet = (AddPlayerPacket) p;
-            PlayerHandler.players.put(packet.id, new NetPlayer(packet.id, packet.name));
+            PlayerHandlerClient.players.put(packet.id, new NetPlayer(packet.id, packet.name));
 
             System.out.println(packet.name + " has joined the game");
         }
@@ -23,9 +23,9 @@ public class EventListener {
         {
             RemovePlayerPacket packet = (RemovePlayerPacket) p;
 
-            System.out.println(PlayerHandler.players.get(packet.id).name + " has quit the game");
+            System.out.println(PlayerHandlerClient.players.get(packet.id).name + " has quit the game");
 
-            PlayerHandler.players.remove(packet.id);
+            PlayerHandlerClient.players.remove(packet.id);
         }
     }
 }

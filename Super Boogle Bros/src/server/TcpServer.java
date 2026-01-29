@@ -1,13 +1,12 @@
 package server;
 
-import packets.AddPlayerPacket;
-import packets.NewChatPacket;
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import packets.AddPlayerPacket;
+import packets.NewChatPacket;
 
 public class TcpServer implements Runnable{
 
@@ -16,12 +15,27 @@ public class TcpServer implements Runnable{
     private boolean running = false;
     private ServerSocket serverSocket;
     private InetAddress ipAddress;
+    private Server server;
 
     private ArrayList<Connection> connections = new ArrayList<>();
 
     public TcpServer(int port, InetAddress ipAddress){
         this.port = port;
         this.ipAddress = ipAddress;
+        this.server = null;
+        // try to make the server socket with the port provided
+        try{
+            serverSocket = new ServerSocket(port);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public TcpServer(Server server, int port, InetAddress ipAddress){
+        this.port = port;
+        this.ipAddress = ipAddress;
+        this.server = server;
         // try to make the server socket with the port provided
         try{
             serverSocket = new ServerSocket(port);
@@ -83,6 +97,7 @@ public class TcpServer implements Runnable{
     public void handlePackets(Object packet, Connection connection){
         if (packet instanceof AddPlayerPacket){
             System.out.println("Received Add Player Packet");
+            server.addPlayer( (AddPlayerPacket) packet);
             broadcastToAllConnections(packet);
         }
         if (packet instanceof NewChatPacket){

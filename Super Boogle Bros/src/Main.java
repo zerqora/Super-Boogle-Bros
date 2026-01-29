@@ -6,6 +6,7 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import packets.NewChatPacket;
+import server.Server;
 import server.TcpServer;
 import server.UdpServer;
 
@@ -18,6 +19,7 @@ public class Main {
 
         int testCommand = scanner.nextInt();
 
+<<<<<<< Updated upstream
         TcpServer tcpServer = null;
         UdpServer udpServer = null;
         if(testCommand == 1)
@@ -26,6 +28,19 @@ public class Main {
             udpServer = new UdpServer(InetAddress.getByName("127.0.0.1"));
             tcpServer.start();
             udpServer.start();
+=======
+        TcpServer tcpServer;
+        UdpServer udpServer;
+
+        Server server;
+        
+        if(testCommand == 1)
+        {
+
+            server = new Server(3080, InetAddress.getLocalHost());
+            server.startServers();
+            
+>>>>>>> Stashed changes
             System.out.println("Type 2 if you would like to create a client for yourself. ");
             testCommand = scanner.nextInt();
         }
