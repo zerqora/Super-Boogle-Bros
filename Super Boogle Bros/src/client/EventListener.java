@@ -8,14 +8,14 @@ import packets.RemovePlayerPacket;
 // TCP Orientated
 // Controls all the movement, inputs, and gameplay basically, by recognizing packets coming FROM the server.
 public class EventListener {
-    
+    // client pov
 
     public void received(Object p)
     {
         if(p instanceof AddPlayerPacket)
         {
             AddPlayerPacket packet = (AddPlayerPacket) p;
-            PlayerHandlerClient.players.put(packet.id, new NetPlayer(packet.id, packet.name));
+
 
             System.out.println(packet.name + " has joined the game");
         }
@@ -23,9 +23,7 @@ public class EventListener {
         {
             RemovePlayerPacket packet = (RemovePlayerPacket) p;
 
-            System.out.println(PlayerHandlerClient.players.get(packet.id).name + " has quit the game");
-
-            PlayerHandlerClient.players.remove(packet.id);
+            System.out.println(packet.name + " has quit the game");
         }
     }
 }

@@ -46,5 +46,8 @@ public class Server {
         // change this later, stores new "empty" netplayers in a hashmap
         playerHandler.put(packet.id, new NetPlayer(packet.id, packet.name)); 
     }
-
+    public void broadcastToAllConnections(Object packet){
+        tcpServer.broadcastToAllConnections(packet);
+    }
+    public void broadcastBytesToAllConnections(byte[] packet){}
 }

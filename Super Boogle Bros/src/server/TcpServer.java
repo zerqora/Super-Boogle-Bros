@@ -87,7 +87,7 @@ public class TcpServer implements Runnable{
             e.printStackTrace();
         }
     }
-    private void broadcastToAllConnections(Object packet){
+    public void broadcastToAllConnections(Object packet){
         for(Connection connection : connections){
             connection.sendObject(packet);
         }

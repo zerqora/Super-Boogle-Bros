@@ -12,59 +12,25 @@ import server.UdpServer;
 
 
 public class Main {
-    public static void main(String args[]) throws UnknownHostException, SocketException {
-
+    public static void main(String args[]) throws UnknownHostException {
 
         Scanner scanner = new Scanner(System.in);
 
         int testCommand = scanner.nextInt();
-
-<<<<<<< Updated upstream
-        TcpServer tcpServer = null;
-        UdpServer udpServer = null;
-        if(testCommand == 1)
-        {
-            tcpServer = new TcpServer(3080, InetAddress.getLocalHost());
-            udpServer = new UdpServer(InetAddress.getByName("127.0.0.1"));
-            tcpServer.start();
-            udpServer.start();
-=======
-        TcpServer tcpServer;
-        UdpServer udpServer;
-
-        Server server;
-        
-        if(testCommand == 1)
-        {
-
+        if (testCommand == 1) {
+            Server server;
             server = new Server(3080, InetAddress.getLocalHost());
             server.startServers();
-            
->>>>>>> Stashed changes
+
             System.out.println("Type 2 if you would like to create a client for yourself. ");
             testCommand = scanner.nextInt();
         }
-        if(testCommand == 2)
-        {
+        if (testCommand == 2) {
             System.out.print("Enter the server address: ");
             String serverAddress = scanner.next();
-            try{
-
+            try {
                 Client client = new Client(serverAddress);
-
-
                 client.connectSockets();
-                
-
-                /* 
-                TcpClient client = new TcpClient(serverAddress, 3080);
-                UdpClient udpClient = new UdpClient(InetAddress.getByName(serverAddress), 3080);
-
-                client.connect();
-                udpClient.start();
-                */
-
-
                 JFrame window = new JFrame();
                 window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 window.setResizable(false);
@@ -79,21 +45,14 @@ public class Main {
 
                 client.gamePanel.startGameThread();
 
-                while (true)
-                {
+                while (true) {
                     String word = scanner.nextLine();
                     client.sendObjectTcp(new NewChatPacket(word));
                 }
-
-                
             } catch (Exception e) {
                 System.out.println("Invalid server address. Failed to connect.");
             }
-
-            
         }
-
-
     }
 }
 
