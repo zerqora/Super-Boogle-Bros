@@ -8,5 +8,14 @@ public enum UdpPacketType {
     DESPAWN, // 1
     MOVE, // 2 and so on
     POSITION,
-    HITBOX
+    BASIC_ATTACK,
+    CHARGED_ATTACK,
+    DASH_ATTACK,
+    SPECIAL_ATTACK,
+    AERIAL_ATTACK,
+    GRAB,
+    THROW,
+    SHIELD,
+    DODGE
+
 }
