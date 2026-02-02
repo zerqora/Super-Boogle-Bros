@@ -5,7 +5,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import packets.AddPlayerPacket;
 
-public class Server {
+public class Server implements Runnable{
     
 
     private int port;
@@ -13,6 +13,8 @@ public class Server {
 
     private TcpServer tcpServer;
     private UdpServer udpServer;
+
+    private Thread gameThread;
 
     private PlayerHandlerServer playerHandler;
 
@@ -39,6 +41,15 @@ public class Server {
     {
         this.tcpServer.start();
         this.udpServer.start();
+        
+        gameThread = new Thread(this);
+        gameThread.start();
+    }
+
+    @Override
+    public void run()
+    {
+        
     }
 
     public void addPlayer(AddPlayerPacket packet)
