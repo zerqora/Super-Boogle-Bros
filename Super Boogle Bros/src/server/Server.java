@@ -18,6 +18,8 @@ public class Server implements Runnable{
 
     private PlayerHandlerServer playerHandler;
 
+    // Server HOLDS the data that the CLIENT DRAWS.
+
 
     public Server(int port, InetAddress host)
     {
@@ -61,4 +63,6 @@ public class Server implements Runnable{
         tcpServer.broadcastToAllConnections(packet);
     }
     public void broadcastBytesToAllConnections(byte[] packet){}
+
+
 }

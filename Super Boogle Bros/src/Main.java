@@ -6,6 +6,7 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import packets.NewChatPacket;
+import server.PlayerHandlerServer;
 import server.Server;
 import server.TcpServer;
 import server.UdpServer;
@@ -29,7 +30,11 @@ public class Main {
             System.out.print("Enter the server address: ");
             String serverAddress = scanner.next();
             try {
-                Client client = new Client(serverAddress);
+                int newId = (int) (Math.random() * 1000);
+                while(PlayerHandlerServer.players.containsKey(newId)){
+                    newId = (int) (Math.random() * 1000);
+                }
+                Client client = new Client(serverAddress, newId);
                 client.connectSockets();
                 JFrame window = new JFrame();
                 window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

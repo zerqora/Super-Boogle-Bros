@@ -14,4 +14,9 @@ public class PlayerHandlerServer {
     {
         players.put(id, netPlayer);
     }
+
+    public NetPlayer get(Integer id)
+    {
+        return players.get(id);
+    }
 }

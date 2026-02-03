@@ -7,6 +7,7 @@ import java.net.ConnectException;
 import java.net.Socket;
 import packets.AddPlayerPacket;
 import packets.RemovePlayerPacket;
+import server.PlayerHandlerServer;
 
 public class TcpClient implements Runnable
 {
@@ -49,7 +50,8 @@ public class TcpClient implements Runnable
             listener = new EventListener();
 
             // send the packet that lets the server know a player has joined
-            out.writeObject(new AddPlayerPacket());
+
+            out.writeObject(new AddPlayerPacket(newId, "TemporaryName"));
 
             new Thread(this).start();
         }

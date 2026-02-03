@@ -13,12 +13,12 @@ public class GamePanel extends JPanel implements Runnable
     //InputHandler inputHandler = new InputHandler(); fsdouibnwrkghwrgnviwrughwkejghwruiw
 
     Client client;
-    NetPlayer player = new NetPlayer(0, "");
+    NetPlayer player;
 
     public GamePanel(Client client)
     {
         this.client = client;
-
+        this.player = new NetPlayer();
         this.setPreferredSize(new Dimension((int)1000, (int)1000));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
@@ -78,7 +78,7 @@ public class GamePanel extends JPanel implements Runnable
         Graphics2D graphic2D = (Graphics2D) graphic;
 
         player.draw(graphic2D);
-
+        System.out.print("Drawing player");
         // class.draw(graphic2D), in the class, draw g2.drawImage(image, x, y, width, height)
 
         graphic2D.dispose();

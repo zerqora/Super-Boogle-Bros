@@ -12,6 +12,8 @@ public class NetPlayer {
     public float posX, posY;
     public float width, height;
 
+    public int health = 200;
+
     public NetPlayer(int id, String name)
     {
         this.id = id;
@@ -42,9 +44,12 @@ public class NetPlayer {
         this.posY = posY;
     }
 
+    public float[] getPosition(){
+        return new float[]{(float)posX, (float)posY};
+    }
 
     
-    public void update()
+    public void update(float posX, float posY)
     {
 
     }

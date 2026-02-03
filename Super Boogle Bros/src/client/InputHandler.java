@@ -29,7 +29,7 @@ public class InputHandler implements KeyListener {
                 desiredVelocity[1] = -1;
             }
             client.sendPacketUdp(UdpPacketWriter.newMovementPacket(10, desiredVelocity[0], desiredVelocity[1]));
-            System.out.println("Attempting to send new movement packet with the desired velocity of " + desiredVelocity[0] + " and " + desiredVelocity[1]);
+            //System.out.println("Attempting to send new movement packet with the desired velocity of " + desiredVelocity[0] + " and " + desiredVelocity[1]);
         }
     }
 
