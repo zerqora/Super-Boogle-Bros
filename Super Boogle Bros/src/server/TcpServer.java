@@ -96,7 +96,7 @@ public class TcpServer implements Runnable{
     // where packets come in from one connection.
     public void handlePackets(Object packet, Connection connection){
         if (packet instanceof AddPlayerPacket){
-            System.out.println("Received Add Player Packet");
+
             server.addPlayer( (AddPlayerPacket) packet);
             broadcastToAllConnections(packet);
         }

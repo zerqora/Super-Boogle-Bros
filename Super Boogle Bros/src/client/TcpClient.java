@@ -51,7 +51,7 @@ public class TcpClient implements Runnable
 
             // send the packet that lets the server know a player has joined
 
-            out.writeObject(new AddPlayerPacket(newId, "TemporaryName"));
+            out.writeObject(new AddPlayerPacket(client.getId(), "TemporaryName"));
 
             new Thread(this).start();
         }

@@ -57,7 +57,8 @@ public class Server implements Runnable{
     public void addPlayer(AddPlayerPacket packet)
     {
         // change this later, stores new "empty" netplayers in a hashmap
-        playerHandler.put(packet.id, new NetPlayer(packet.id, packet.name)); 
+        playerHandler.put(packet.id, new NetPlayer(packet.id, packet.name));
+        System.out.println("Added new player with the ID " + packet.id);
     }
     public void broadcastToAllConnections(Object packet){
         tcpServer.broadcastToAllConnections(packet);

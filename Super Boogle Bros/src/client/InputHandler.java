@@ -28,8 +28,8 @@ public class InputHandler implements KeyListener {
             if (keyCode == KeyEvent.VK_SPACE){
                 desiredVelocity[1] = -1;
             }
-            client.sendPacketUdp(UdpPacketWriter.newMovementPacket(10, desiredVelocity[0], desiredVelocity[1]));
-            //System.out.println("Attempting to send new movement packet with the desired velocity of " + desiredVelocity[0] + " and " + desiredVelocity[1]);
+            client.sendPacketUdp(UdpPacketWriter.newMovementPacket(client.getId(), desiredVelocity[0], desiredVelocity[1]));
+            System.out.println("Attempting to send new movement packet from player ID " + client.getId() + " with the desired velocity of " + desiredVelocity[0] + " and " + desiredVelocity[1]);
         }
     }
 

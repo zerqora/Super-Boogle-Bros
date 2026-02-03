@@ -78,7 +78,6 @@ public class GamePanel extends JPanel implements Runnable
         Graphics2D graphic2D = (Graphics2D) graphic;
 
         player.draw(graphic2D);
-        System.out.print("Drawing player");
         // class.draw(graphic2D), in the class, draw g2.drawImage(image, x, y, width, height)
 
         graphic2D.dispose();
