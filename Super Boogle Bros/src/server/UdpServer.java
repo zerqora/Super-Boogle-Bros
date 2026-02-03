@@ -11,11 +11,13 @@ public class UdpServer implements Runnable {
     int serverPort;
     InetAddress serverAddress;
     byte[] buffer = new byte[1024];
+    Server server;
 
-    public UdpServer(InetAddress serverIP) throws SocketException {
+    public UdpServer(Server server, InetAddress serverIP) throws SocketException {
         socket = new DatagramSocket(7777);
         this.serverPort = 7777;
         this.serverAddress = serverIP;
+        this.server = server;
     }
     
     @Override

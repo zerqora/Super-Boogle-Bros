@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 
 
 
-
+// the holder for the animation, hitboxes and surrounding data
 public class Action
 {
 

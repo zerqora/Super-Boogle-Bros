@@ -1,7 +1,10 @@
 package server;
 
 import client.NetPlayer;
+import client.UdpPacketType;
+import client.UdpPacketWriter;
 import java.net.InetAddress;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.net.SocketException;
 import packets.AddPlayerPacket;
 
@@ -30,7 +33,7 @@ public class Server implements Runnable{
         try
         {
             this.tcpServer = new TcpServer(this, port, host);
-            this.udpServer = new UdpServer(host);
+            this.udpServer = new UdpServer(this, host);
         
         }   
         catch (SocketException e) 
@@ -52,6 +55,32 @@ public class Server implements Runnable{
     public void run()
     {
         
+
+        
+
+        
+
+        // send what frame of what state player is in
+    }
+
+    public void handlePacket(Byte[] data)
+    {
+        
+        switch((int)data[0])
+        {
+            
+            case (UdpPacketType.MOVE):
+                System.err.println("hello");
+
+
+            
+
+        
+        
+        }
+        // clients send inputs
+
+        // decide what state to set client in based on packet
     }
 
     public void addPlayer(AddPlayerPacket packet)
@@ -63,6 +92,8 @@ public class Server implements Runnable{
     public void broadcastToAllConnections(Object packet){
         tcpServer.broadcastToAllConnections(packet);
     }
+
+    // sends packet to all clients via UDP
     public void broadcastBytesToAllConnections(byte[] packet){}
 
 
