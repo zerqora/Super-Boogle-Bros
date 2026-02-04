@@ -1,5 +1,7 @@
 package server;
 
+import client.UdpPacketType;
+
 import java.io.IOException;
 import java.net.*;
 import java.util.Arrays;
@@ -53,5 +55,17 @@ public class UdpServer implements Runnable {
     public void start() {
         new Thread(this).start();
         System.out.println("UDP Server Started");
+    }
+    public void handlePacket(byte[] data, InetAddress senderAddress, int senderPort) {
+        int packetTypeId = data[0] & 0xFF; // important for byte conversion
+
+        UdpPacketType type = UdpPacketType.getTypeFromId(packetTypeId);
+
+        switch(type){
+            case MOVE:
+                break;
+            case BASIC_ATTACK:
+                break;
+        }
     }
 }
