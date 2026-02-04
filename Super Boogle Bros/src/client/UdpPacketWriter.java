@@ -3,7 +3,11 @@ package client;
 import actions.*;
 
 public class UdpPacketWriter {
-
+    public static byte[] newPlayerPacket(int playerID){
+        byte[] data = new byte[2];
+        data[0] = (byte) UdpPacketType.NEW_PLAYER.getId();
+        data[1] = (byte) playerID;
+    }
     public static byte[] newMovementPacket(int playerID, int dx, int dy){
         byte[] data = new byte[4];
         data[0] = (byte)UdpPacketType.MOVE.getId();

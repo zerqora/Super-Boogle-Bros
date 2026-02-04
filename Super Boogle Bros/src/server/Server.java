@@ -19,7 +19,7 @@ public class Server implements Runnable{
 
     private Thread gameThread;
 
-    private PlayerHandlerServer playerHandler;
+    public PlayerHandlerServer playerHandler;
 
     // Server HOLDS the data that the CLIENT DRAWS.
 
@@ -87,6 +87,7 @@ public class Server implements Runnable{
     {
         // change this later, stores new "empty" netplayers in a hashmap
         playerHandler.put(packet.id, new NetPlayer(packet.id, packet.name));
+        playerHandler.
         System.out.println("Added new player with the ID " + packet.id);
     }
     public void broadcastToAllConnections(Object packet){

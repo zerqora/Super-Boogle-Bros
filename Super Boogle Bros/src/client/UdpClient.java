@@ -36,5 +36,13 @@ public class UdpClient {
             throw new RuntimeException();
         }
     }
+    public void receivePacket(byte[] packet) {
+        int packetTypeId = packet[0] & 0xFF;
+        UdpPacketType type = UdpPacketType.getTypeFromId(packetTypeId);
 
+        switch (type) {
+            case MOVE:
+                //
+        }
+    }
 }

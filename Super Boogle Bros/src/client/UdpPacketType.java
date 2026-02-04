@@ -4,6 +4,7 @@ package client;
 
 // Initialized as the FIRST byte of data in a packet.
 public enum UdpPacketType {
+    NEW_PLAYER(13),
     SPAWN(0),
     DESPAWN(1),
     MOVE(2),

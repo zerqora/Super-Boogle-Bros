@@ -44,7 +44,7 @@ public class UdpServer implements Runnable {
                                 " -> " + Arrays.toString(data)
                 );
 
-                //handlePacket(data, senderAddress, senderPort);
+                handlePacket(data, senderAddress, senderPort);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -62,6 +62,9 @@ public class UdpServer implements Runnable {
         UdpPacketType type = UdpPacketType.getTypeFromId(packetTypeId);
 
         switch(type){
+            case NEW_PLAYER:
+                server.playerHandler.put(senderAddress, senderPort);
+                break;
             case MOVE:
                 break;
             case BASIC_ATTACK:
