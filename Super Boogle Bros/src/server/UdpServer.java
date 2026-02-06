@@ -64,11 +64,15 @@ public class UdpServer implements Runnable {
         switch(type){
             case NEW_PLAYER:
                 server.playerHandler.put(senderAddress, senderPort);
+                System.out.println("Putting the new address in the player handler");
                 break;
             case MOVE:
                 break;
             case BASIC_ATTACK:
                 break;
         }
+    }
+    public void sendPacket(byte[] data, InetAddress senderAddress, int senderPort) {
+
     }
 }

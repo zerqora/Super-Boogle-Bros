@@ -68,9 +68,6 @@ public class Server implements Runnable{
         
         switch((int)data[0])
         {
-            
-            case (UdpPacketType.MOVE):
-                System.err.println("hello");
 
 
             
@@ -87,15 +84,17 @@ public class Server implements Runnable{
     {
         // change this later, stores new "empty" netplayers in a hashmap
         playerHandler.put(packet.id, new NetPlayer(packet.id, packet.name));
-        playerHandler.
-        System.out.println("Added new player with the ID " + packet.id);
+
+
     }
     public void broadcastToAllConnections(Object packet){
         tcpServer.broadcastToAllConnections(packet);
     }
 
     // sends packet to all clients via UDP
-    public void broadcastBytesToAllConnections(byte[] packet){}
+    public void broadcastBytesToAllConnections(byte[] packet){
+
+    }
 
 
 }

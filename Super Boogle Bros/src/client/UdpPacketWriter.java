@@ -7,6 +7,7 @@ public class UdpPacketWriter {
         byte[] data = new byte[2];
         data[0] = (byte) UdpPacketType.NEW_PLAYER.getId();
         data[1] = (byte) playerID;
+        return data;
     }
     public static byte[] newMovementPacket(int playerID, int dx, int dy){
         byte[] data = new byte[4];

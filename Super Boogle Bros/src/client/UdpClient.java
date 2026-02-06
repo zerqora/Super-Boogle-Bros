@@ -22,6 +22,7 @@ public class UdpClient {
     }
 
     public void start() {
+        sendPacket(UdpPacketWriter.newPlayerPacket(client.getId()));
         System.out.println("Starting Udp Client");
     }
 
@@ -39,10 +40,6 @@ public class UdpClient {
     public void receivePacket(byte[] packet) {
         int packetTypeId = packet[0] & 0xFF;
         UdpPacketType type = UdpPacketType.getTypeFromId(packetTypeId);
-
-        switch (type) {
-            case MOVE:
-                //
-        }
+        // server should send data back to the client so it knows whatt to draw
     }
 }
