@@ -30,6 +30,7 @@ public class Hitbox
         this.damage = damage;
         this.knockback = knockback;
         this.angle = angle;
+        
     }
 
     
