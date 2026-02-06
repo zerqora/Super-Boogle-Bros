@@ -64,7 +64,7 @@ public class UdpServer implements Runnable {
         switch(type){
             case NEW_PLAYER:
                 server.playerHandler.put(senderAddress, senderPort);
-                System.out.println("Putting the new address in the player handler");
+                //System.out.println("Putting the new address in the player handler");
                 break;
             case MOVE:
                 break;
@@ -72,7 +72,8 @@ public class UdpServer implements Runnable {
                 break;
         }
     }
-    public void sendPacket(byte[] data, InetAddress senderAddress, int senderPort) {
-
+    public void sendPacket(byte[] data, InetAddress destination, int port) throws IOException {
+        DatagramPacket packet = new DatagramPacket(data, data.length, destination, port);
+        socket.send(packet);
     }
 }
