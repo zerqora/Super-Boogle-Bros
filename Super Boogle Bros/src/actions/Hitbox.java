@@ -17,10 +17,6 @@ public class Hitbox
     public Rectangle.Float hitbox;
 
 
-
-
-    
-
     public Hitbox(float offsetX, float offsetY, int width, int height, float damage, float knockback, float angle)
     {
         this.offsetX = offsetX;

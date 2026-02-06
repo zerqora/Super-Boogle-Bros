@@ -1,7 +1,6 @@
 package server;
 
 import client.UdpPacketType;
-
 import java.io.IOException;
 import java.net.*;
 import java.util.Arrays;
@@ -15,7 +14,8 @@ public class UdpServer implements Runnable {
     byte[] buffer = new byte[1024];
     Server server;
 
-    public UdpServer(Server server, InetAddress serverIP) throws SocketException {
+    public UdpServer(Server server, InetAddress serverIP) throws SocketException 
+    {
         socket = new DatagramSocket(7777);
         this.serverPort = 7777;
         this.serverAddress = serverIP;
@@ -23,7 +23,8 @@ public class UdpServer implements Runnable {
     }
     
     @Override
-    public void run() {
+    public void run() 
+    {
         System.out.println("UDP Server listening on port " + serverPort);
 
         while (true) {
@@ -56,6 +57,12 @@ public class UdpServer implements Runnable {
         new Thread(this).start();
         System.out.println("UDP Server Started");
     }
+
+    public void sendPacket(byte[] data, InetAddress destination, int port) throws IOException {
+        DatagramPacket packet = new DatagramPacket(data, data.length, destination, port);
+        socket.send(packet);
+    }
+
     public void handlePacket(byte[] data, InetAddress senderAddress, int senderPort) {
         int packetTypeId = data[0] & 0xFF; // important for byte conversion
 
@@ -71,9 +78,5 @@ public class UdpServer implements Runnable {
             case BASIC_ATTACK:
                 break;
         }
-    }
-    public void sendPacket(byte[] data, InetAddress destination, int port) throws IOException {
-        DatagramPacket packet = new DatagramPacket(data, data.length, destination, port);
-        socket.send(packet);
     }
 }

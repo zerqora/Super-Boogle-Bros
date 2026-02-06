@@ -9,6 +9,7 @@ public class Client
     public GamePanel gamePanel;
     public InputHandler inputHandler;
     private int id;
+    public NetPlayer netPlayer;
     public Client(String serverAddress, int id)
     {
         try{
@@ -36,6 +37,11 @@ public class Client
         udpClient.start();
     }
 
+    public void createNewPlayer()
+    {
+        this.netPlayer = new NetPlayer();
+        
+    }
     public void sendObjectTcp(Object packet)
     {
         tcpClient.sendObject(packet);
