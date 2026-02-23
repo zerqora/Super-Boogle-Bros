@@ -33,7 +33,7 @@ public class UdpClient implements Runnable{
         DatagramPacket datagramPacket = new DatagramPacket(packet, packet.length, serverIP, serverPort);
         try{
             socket.send(datagramPacket);
-            System.out.println("Sent packet with type " + datagramPacket + " to " + datagramPacket.getAddress().getHostName());
+            //System.out.println("Sent packet with type " + datagramPacket + " to " + datagramPacket.getAddress().getHostName());
         }
         catch(IOException e){
             throw new RuntimeException();
@@ -45,7 +45,6 @@ public class UdpClient implements Runnable{
         UdpPacketType type = UdpPacketType.getTypeFromId(packetTypeId);
         System.out.println("Receiving packet from the server: " + Arrays.toString(packet));
         // server should send data back to the client so it knows what to draw
-
     }
 
     @Override

@@ -11,24 +11,23 @@ public class PlayerHandlerServer {
     // ID, Player with their ID and name
     // When a player joins the server it adds them to the hash map
     public static HashMap<Integer, NetPlayer> players = new HashMap<>();
-    public static HashMap<Integer, InetAddress> addresses = new HashMap<>();
-    public void put(Integer id, NetPlayer netPlayer)
+    public void put(Integer id, NetPlayer player)
     {
-        players.put(id, netPlayer);
-    }
-    public void put(InetAddress address, Integer id){
-        addresses.put(id, address);
+        players.put(id, player);
     }
     public NetPlayer[] getPlayers(){
         return players.values().toArray(new NetPlayer[0]);
     }
-    public InetAddress[] getAddresses()
-    {
-        return addresses.values().toArray(new InetAddress[0]);
+    public Integer[] getIDs(){
+        return(Integer[]) players.keySet().toArray();
     }
-
-    public NetPlayer get(Integer id)
+    public NetPlayer getPlayer(Integer id)
     {
         return players.get(id);
     }
+    public boolean playerWithIdExists(Integer id)
+    {
+        return players.containsKey(id);
+    }
+
 }

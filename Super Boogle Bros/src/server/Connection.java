@@ -15,7 +15,6 @@ public class Connection implements Runnable{
     public Connection(Socket socket, TcpServer server){
         this.socket = socket;
         this.server = server;
-        id = 0;
         try{
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
@@ -35,8 +34,6 @@ public class Connection implements Runnable{
                     Object data = in.readObject();
                     //System.out.println("Receiving data " + data);
                     server.handlePackets(data, this);
-
-
                 }
                 catch(ClassNotFoundException e){
                     e.printStackTrace();
@@ -45,6 +42,10 @@ public class Connection implements Runnable{
         } catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
     // Close this socket and end the connection

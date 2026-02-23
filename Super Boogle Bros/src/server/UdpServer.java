@@ -1,6 +1,9 @@
 package server;
 
+import client.NetPlayer;
 import client.UdpPacketType;
+import client.UdpPacketWriter;
+
 import java.io.IOException;
 import java.net.*;
 import java.util.Arrays;
@@ -38,12 +41,12 @@ public class UdpServer implements Runnable {
                 InetAddress senderAddress = packet.getAddress();
                 int senderPort = packet.getPort();
 
-                System.out.println(
+                /*System.out.println(
                         "Received UDP packet from " +
                                 senderAddress.getHostAddress() +
                                 ":" + senderPort +
                                 " -> " + Arrays.toString(data)
-                );
+                );*/
 
                 handlePacket(data, senderAddress, senderPort);
 
@@ -63,20 +66,45 @@ public class UdpServer implements Runnable {
         socket.send(packet);
     }
 
-    public void handlePacket(byte[] data, InetAddress senderAddress, int senderPort) {
+    public void handlePacket(byte[] data, InetAddress senderAddress, int senderPort) throws IOException {
         int packetTypeId = data[0] & 0xFF; // important for byte conversion
+        int packetPlayerId = data[1] & 0xFF;
 
         UdpPacketType type = UdpPacketType.getTypeFromId(packetTypeId);
 
         switch(type){
             case NEW_PLAYER:
-                server.playerHandler.put(senderAddress, senderPort);
-                //System.out.println("Putting the new address in the player handler");
+                System.out.println("Putting the new address in the player handler");
+                // create a new Endpoint object that holds the players' ip and port. This keeps track of how packets can be broadcasted from server to client.
+                server.addNewEndpoint(packetPlayerId, senderAddress, senderPort);
                 break;
             case MOVE:
+                System.out.println("Getting player with the ID " +  packetPlayerId);
+                NetPlayer player = server.playerHandler.getPlayer(packetPlayerId);
+
+                int dx = data[2] & 0xFF;
+                int dy = data[3] & 0xFF;
+                handleMovement(player, dx, dy);
                 break;
             case BASIC_ATTACK:
                 break;
         }
+    }
+
+    public void handleMovement(NetPlayer player, int dx, int dy) {
+        if (!colliding(player)) {
+            // the client should interpolate this smoothly when drawing. the server simply holds the true value of the player's position
+            player.posX += dx;
+            player.posY += dy;
+            System.out.println("Player " + player.name + "'s new position is " + player.posX + ", " + player.posY);
+        }
+
+    }
+
+    public boolean colliding(NetPlayer player) {
+        boolean collision = false;
+        float playerX = player.posX;
+        float playerY = player.posY;
+        return collision;
     }
 }

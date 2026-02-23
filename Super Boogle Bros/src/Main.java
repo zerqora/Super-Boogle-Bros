@@ -30,11 +30,8 @@ public class Main {
             System.out.print("Enter the server address: ");
             String serverAddress = scanner.next();
             try {
-                int newId = (int) (Math.random() * 1000);
-                while(PlayerHandlerServer.players.containsKey(newId)){
-                    newId = (int) (Math.random() * 1000);
-                }
-                Client client = new Client(serverAddress, newId);
+
+                Client client = new Client(serverAddress);
                 client.connectSockets();
                 JFrame window = new JFrame();
                 window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

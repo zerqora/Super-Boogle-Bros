@@ -1,5 +1,7 @@
 package client;
 
+import server.PlayerHandlerServer;
+
 import java.net.InetAddress;
 
 public class Client 
@@ -10,10 +12,9 @@ public class Client
     public InputHandler inputHandler;
     private int id;
     public NetPlayer netPlayer;
-    public Client(String serverAddress, int id)
+    public Client(String serverAddress)
     {
         try{
-            this.id = id;
             tcpClient = new TcpClient(this, serverAddress, 3080); //initialize both connections to the server as well as the gamepanel
             udpClient = new UdpClient(this, InetAddress.getByName("127.0.0.1"), 7777);
             gamePanel = new GamePanel(this);
@@ -29,6 +30,9 @@ public class Client
     }
     public int getId(){
         return id;
+    }
+    public void setId(int id){
+        this.id = id;
     }
     //connect to both servers
     public void connectSockets()

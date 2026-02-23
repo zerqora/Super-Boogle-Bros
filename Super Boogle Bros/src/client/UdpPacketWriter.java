@@ -7,6 +7,7 @@ public class UdpPacketWriter {
         byte[] data = new byte[2];
         data[0] = (byte) UdpPacketType.NEW_PLAYER.getId();
         data[1] = (byte) playerID;
+        //System.out.println("Made new player packet");
         return data;
     }
     public static byte[] newMovementPacket(int playerID, int dx, int dy){
@@ -18,6 +19,15 @@ public class UdpPacketWriter {
         return data;
     }
 
+    // SERVER-SENT PACKETS
+    public static byte[] newPlayerPositionSnapShot(int playerID, int x, int y){
+        byte[] packet = new byte[4];
+        packet[0] = (byte)UdpPacketType.POSITION.getId();
+        packet[1] = (byte)playerID;
+        packet[2] = (byte)x;
+        packet[3] = (byte)y;
+        return packet;
+    }
     // this should actually not be a packet because clients should be sending intent (like left click)
     // the server should be making the hitbox upon receiving the packet
     // make this something like newAttackPacket and just send the player's position and character

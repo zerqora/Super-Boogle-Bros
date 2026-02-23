@@ -37,7 +37,9 @@ public class TcpClient implements Runnable
         this.host = host;
         this.port = port;
     }
-
+    public void setID(int id){
+        client.setId(id);
+    }
     // connects to the server, making a socket, and input and output streams
     // also begins a thread on the client-side
     public void connect()
@@ -47,7 +49,7 @@ public class TcpClient implements Runnable
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
 
-            listener = new EventListener();
+            listener = new EventListener(this);
 
             // send the packet that lets the server know a player has joined
 

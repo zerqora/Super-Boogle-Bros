@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import packets.AddPlayerPacket;
 import packets.NewChatPacket;
+import packets.ReceiveIDPacket;
 
 public class TcpServer implements Runnable{
 
@@ -70,7 +71,7 @@ public class TcpServer implements Runnable{
 
     // Initialize any new connections to the server
     private void iniSocket(Socket socket) {
-        Connection connection = new Connection(socket, this);
+        Connection connection = new Connection(socket, this );
         System.out.println("Connection Established");
         connections.add(connection);
         new Thread(connection).start();
@@ -96,8 +97,13 @@ public class TcpServer implements Runnable{
     // where packets come in from one connection.
     public void handlePackets(Object packet, Connection connection){
         if (packet instanceof AddPlayerPacket){
-
-            server.addPlayer( (AddPlayerPacket) packet);
+            // later, the client's id should be pulled from a file or something so they can keep their data throughout multiple playthroughs
+            int newId = (int) (Math.random() * 1000);
+            while(PlayerHandlerServer.players.containsKey(newId)){
+                newId = (int) (Math.random() * 1000);
+            }
+            server.addPlayer((AddPlayerPacket) packet, newId);
+            connection.sendObject(new ReceiveIDPacket(newId));
             broadcastToAllConnections(packet);
         }
         if (packet instanceof NewChatPacket){
