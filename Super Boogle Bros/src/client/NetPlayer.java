@@ -1,7 +1,9 @@
 package client;
 
+import actions.PlayerCharacter;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class NetPlayer {
@@ -13,6 +15,9 @@ public class NetPlayer {
     public float width, height;
 
     public int health = 200;
+    public PlayerCharacter character;
+
+    BufferedImage image;
 
     public NetPlayer(int id, String name)
     {
@@ -27,6 +32,8 @@ public class NetPlayer {
 
         width = 64f;
         height = 64f;
+
+        character = new PlayerCharacter(this);
     }
 
     public NetPlayer(float posX, float posY, float width, float height)
@@ -54,15 +61,27 @@ public class NetPlayer {
 
     }
 
+    public void setImage(String image)
+    {
+        try
+        {
+            this.image = ImageIO.read(getClass().getResourceAsStream(image));
+        }
+        catch(IOException e)
+        { 
+            System.out.println("Wrong File Type");
+        }
+    }
+
     public void draw(Graphics2D g2)
     {
 
         try 
         {
-            BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/greatimages/TestGuy.png"));
+            this.image = ImageIO.read(getClass().getResourceAsStream("/greatimages/TestGuy.png"));
             g2.drawImage(image, (int) posX, (int) posY, (int) width, (int) height, null);
         } 
-        catch (Exception e) {}
+        catch (IOException e) {}
     }
 
     

@@ -10,7 +10,7 @@ public class GamePanel extends JPanel implements Runnable
 {
     
     private Thread gameThread;
-    //InputHandler inputHandler = new InputHandler(); fsdouibnwrkghwrgnviwrughwkejghwruiw
+    private InputHandler inputHandler;
 
     Client client;
     NetPlayer player;
@@ -23,10 +23,15 @@ public class GamePanel extends JPanel implements Runnable
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
     }
+
     public void addNewListener(InputHandler inputHandler){
         this.addKeyListener(inputHandler);
+        this.addMouseListener(inputHandler);
         this.setFocusable(true);
+
+        this.inputHandler = inputHandler;
     }
+
     public void startGameThread()
     {
         gameThread = new Thread(this);
@@ -63,11 +68,31 @@ public class GamePanel extends JPanel implements Runnable
         }
     }
 
-
     public void update()
     {
         
-        // take in from udp
+       // update player inputs
+
+       
+        
+       
+       // basic attack is left click + direction
+       if(inputHandler.inputLeftClick && (inputHandler.inputX != 0 || inputHandler.inputY != 0))
+        {
+            if(inputHandler.inputX != 0) client.sendPacketUdp(UdpPacketWriter.newBasicAttackPacket(client.getId(), inputHandler.inputX, 0)); // send attack with dx
+            else if(inputHandler.inputY != 0) client.sendPacketUdp(UdpPacketWriter.newBasicAttackPacket(client.getId(), 0, inputHandler.inputY)); // send attack with dy
+
+            System.out.println("attempting to send basic movement");
+            return;
+        }
+       
+       // movement input   ONLY IF NO OTHER INPUT
+       if(inputHandler.inputX != 0 || inputHandler.inputJump)
+        {
+            client.sendPacketUdp(UdpPacketWriter.newMovementPacket(client.getId(), inputHandler.inputX , (inputHandler.inputJump) ? -1 : 0)); //x,y
+            System.out.println("Attempting to send new movement packet from player ID " + client.getId() + " with the desired velocity of " + inputHandler.inputX + " and " + ((inputHandler.inputJump) ? -1 : 0));
+        }
+       
     }
 
     @Override
