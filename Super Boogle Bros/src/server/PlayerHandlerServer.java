@@ -13,6 +13,7 @@ public class PlayerHandlerServer {
     public static HashMap<Integer, NetPlayer> players = new HashMap<>();
     public void put(Integer id, NetPlayer player)
     {
+        System.out.println("New player: " + player + " ID: " + id);
         players.put(id, player);
     }
     public NetPlayer[] getPlayers(){
@@ -23,6 +24,7 @@ public class PlayerHandlerServer {
     }
     public NetPlayer getPlayer(Integer id)
     {
+        System.out.println(players.get(id));
         return players.get(id);
     }
     public boolean playerWithIdExists(Integer id)

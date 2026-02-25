@@ -79,12 +79,15 @@ public class UdpServer implements Runnable {
                 server.addNewEndpoint(packetPlayerId, senderAddress, senderPort);
                 break;
             case MOVE:
-                System.out.println("Getting player with the ID " +  packetPlayerId);
                 NetPlayer player = server.playerHandler.getPlayer(packetPlayerId);
-
+                if(player == null){
+                    System.out.println("Player with ID " + packetPlayerId + " not found");
+                    break;
+                }
                 int dx = data[2] & 0xFF;
                 int dy = data[3] & 0xFF;
                 handleMovement(player, dx, dy);
+
                 break;
             case BASIC_ATTACK:
                 break;
@@ -106,5 +109,10 @@ public class UdpServer implements Runnable {
         float playerX = player.posX;
         float playerY = player.posY;
         return collision;
+    }
+
+    // send a player's new updated info to every client
+    public void sendNewSnapshot(NetPlayer player) {
+
     }
 }

@@ -1,6 +1,8 @@
 package server;
 
 import client.NetPlayer;
+
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
@@ -65,8 +67,8 @@ public class Server implements Runnable{
 
     public void addPlayer(AddPlayerPacket packet, int id)
     {
-        // change this later, stores new "empty" netplayers in a hashmap
-
+        // add the player to a hashmap of more players by their id
+        System.out.println("Supposedly adding player to the server");
         playerHandler.put(id, new NetPlayer(id, packet.name));
 
 
@@ -78,7 +80,7 @@ public class Server implements Runnable{
                 return;
             }
         }
-        // create a new endpoint
+        // create a new endpoint that holds the player's ip and port
         Endpoint endpoint = new Endpoint(id, ip, port);
         endpoints.add(endpoint);
         System.out.println("New Endpoint Added");
@@ -92,8 +94,10 @@ public class Server implements Runnable{
     }
 
     // sends packet to all clients via UDP
-    public void broadcastBytesToAllConnections(byte[] packet){
-        
+    public void broadcastBytesToAllConnections(byte[] packet) throws IOException {
+        for(Endpoint ep : endpoints){
+            udpServer.sendPacket(packet, ep.getIp(), ep.getPort());
+        }
     }
 
 

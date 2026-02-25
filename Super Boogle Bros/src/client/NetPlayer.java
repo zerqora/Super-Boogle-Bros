@@ -18,6 +18,11 @@ public class NetPlayer {
     {
         this.id = id;
         this.name = name;
+        posX = 0;
+        posY = 0;
+
+        width = 64f;
+        height = 64f;
     }
 
     public NetPlayer()
