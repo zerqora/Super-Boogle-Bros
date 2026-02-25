@@ -1,7 +1,5 @@
 package client;
 
-import actions.*;
-
 public class UdpPacketWriter {
     public static byte[] newPlayerPacket(int playerID){
         byte[] data = new byte[2];
@@ -18,6 +16,22 @@ public class UdpPacketWriter {
         data[3] = (byte)(dy);
         return data;
     }
+
+   
+    public static byte[] newBasicAttackPacket(int playerID, int dx, int dy)
+    {
+        byte[] data = new byte[4];
+        data[0] = (byte)UdpPacketType.BASIC_ATTACK.getId();
+        data[1] = (byte)playerID;
+        data[2] = (byte)(dx); //direction on the X, left or right
+        data[3] = (byte)(dy); //direction on the Y, up or down (CAN ONLY BE EITHER X OR Y)
+        return data; 
+    }
+
+    
+
+
+    
 
     // SERVER-SENT PACKETS
     public static byte[] newPlayerPositionSnapShot(int playerID, int x, int y){
