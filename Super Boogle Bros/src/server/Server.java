@@ -95,10 +95,9 @@ public class Server implements Runnable{
 
     // sends packet to all clients via UDP
     public void broadcastBytesToAllConnections(byte[] packet) throws IOException {
-        for(Endpoint ep : endpoints){
+        for (Endpoint ep : endpoints) {
             udpServer.sendPacket(packet, ep.getIp(), ep.getPort());
         }
     }
-
 
 }

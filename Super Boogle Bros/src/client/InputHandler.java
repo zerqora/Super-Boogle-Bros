@@ -1,5 +1,7 @@
 package client;
 
+import server.UdpServer;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -32,7 +34,7 @@ public class InputHandler implements KeyListener, MouseListener {
         if(keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_W) inputY = ((keyCode == KeyEvent.VK_S) ? 1 : 0) - ((keyCode == KeyEvent.VK_W) ? 1 : 0);
 
         if(keyCode == KeyEvent.VK_SPACE) inputJump = true;
-        
+
     }
 
     @Override
