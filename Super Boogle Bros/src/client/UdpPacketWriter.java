@@ -34,7 +34,7 @@ public class UdpPacketWriter {
     
 
     // SERVER-SENT PACKETS
-    public static byte[] newPlayerPositionSnapShot(int playerID, int x, int y){
+    public static byte[] newPlayerPositionSnapShot(int playerID, float x, float y){
         byte[] packet = new byte[4];
         packet[0] = (byte)UdpPacketType.POSITION.getId();
         packet[1] = (byte)playerID;

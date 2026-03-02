@@ -2,6 +2,8 @@ package server;
 
 import client.NetPlayer;
 import client.UdpPacketType;
+import client.UdpPacketWriter;
+
 import java.io.IOException;
 import java.net.*;
 import java.util.Arrays;
@@ -101,6 +103,7 @@ public class UdpServer implements Runnable {
             player.posX += dx;
             player.posY += dy;
             System.out.println("Player " + player.name + "'s new position is " + player.posX + ", " + player.posY);
+            server.broadcastToAllConnections(UdpPacketWriter.newPlayerPositionSnapShot(player.id, player.posX, player.posY));
         }
 
     }
