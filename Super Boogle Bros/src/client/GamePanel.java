@@ -73,7 +73,6 @@ public class GamePanel extends JPanel implements Runnable
         
        // update player inputs
 
-       
         
        
        // basic attack is left click + direction

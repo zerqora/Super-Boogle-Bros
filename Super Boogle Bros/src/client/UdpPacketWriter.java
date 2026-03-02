@@ -42,6 +42,13 @@ public class UdpPacketWriter {
         packet[3] = (byte)y;
         return packet;
     }
+
+
+
+
+
+
+    
     // this should actually not be a packet because clients should be sending intent (like left click)
     // the server should be making the hitbox upon receiving the packet
     // make this something like newAttackPacket and just send the player's position and character

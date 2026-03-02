@@ -1,12 +1,10 @@
 package server;
 
 import client.NetPlayer;
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
-
 import packets.AddPlayerPacket;
 
 public class Server implements Runnable{
