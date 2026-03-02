@@ -100,9 +100,9 @@ public class TcpServer implements Runnable{
             // later, the client's id should be pulled from a file or something so they can keep their data throughout multiple playthroughs
 
             // create a new id for the new player
-            int newId = (int) (Math.random() * 1000);
+            int newId = (int) (Math.random() * 256);
             while(PlayerHandlerServer.players.containsKey(newId)){
-                newId = (int) (Math.random() * 1000);
+                newId = (int) (Math.random() * 256);
             }
             System.out.println("New ID: " + newId + " to be added to the server");
             // tell the server to add a new player
