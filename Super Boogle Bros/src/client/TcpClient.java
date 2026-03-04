@@ -104,9 +104,7 @@ public class TcpClient implements Runnable
     @Override
     public void run()
     {
-    
         running = true;
-
         while(running)
         {
             try{

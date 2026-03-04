@@ -14,7 +14,6 @@ public class GamePanel extends JPanel implements Runnable
 
     Client client;
     NetPlayer player;
-
     public GamePanel(Client client)
     {
         this.client = client;
@@ -108,80 +107,3 @@ public class GamePanel extends JPanel implements Runnable
     }
 }
 
-
-
-
-
-
-
-
-
-
-/* 
-    public void startGameThread()
-    {
-        gameThread = new Thread(this);
-        gameThread.start();
-    }
-
-    double drawInterval = 1000000000.0 / FPS;
-    double delta;
-    long lastTime;
-    long currentTime;
-
-    @Override
-    public void run()
-    {
-        delta = 0;
-        lastTime = System.nanoTime();
-
-        while(gameThread != null)
-        {
-            currentTime = System.nanoTime();
-
-            delta += (currentTime - lastTime) / drawInterval;
-
-            lastTime = currentTime;
-
-            if(delta > 1)
-            {
-                update();
-                repaint();
-
-                delta--;
-            }
-        }
-    }
-
-    public void update()
-    {
-        player.update();
-        entityManager.update();
-        tileM.update();
-    }
-
-    @Override
-    public  void paintComponent(Graphics g)
-    {
-        super.paintComponent(g);
-
-        Graphics2D g2 = (Graphics2D) g;
-        try
-        {
-            tileM.draw(g2);
-            player.draw(g2);
-            entityManager.draw(g2);
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-        
-
-        
-        g2.dispose();
-
-
-    }
-}
-*/

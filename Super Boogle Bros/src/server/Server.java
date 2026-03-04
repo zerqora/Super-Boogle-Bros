@@ -23,7 +23,6 @@ public class Server implements Runnable{
     public ArrayList<Endpoint> endpoints;
     // Server HOLDS the data that the CLIENT DRAWS.
 
-
     public Server(int port, InetAddress host)
     {
         this.port = port;
@@ -66,8 +65,8 @@ public class Server implements Runnable{
     public void addPlayer(AddPlayerPacket packet, int id)
     {
         // add the player to a hashmap of more players by their id
-        System.out.println("Supposedly adding player to the server");
-        playerHandler.put(id, new NetPlayer(id, packet.name));
+        NetPlayer newPlayer = new NetPlayer(id, packet.name);
+        playerHandler.put(id, newPlayer);
 
 
     }
@@ -97,5 +96,4 @@ public class Server implements Runnable{
             udpServer.sendPacket(packet, ep.getIp(), ep.getPort());
         }
     }
-
 }
