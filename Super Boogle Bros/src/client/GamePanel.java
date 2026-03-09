@@ -40,6 +40,7 @@ public class GamePanel extends JPanel implements Runnable
 
     int fps = 60;
     double delta;
+    // how many nano seconds for one frame if it is 60 fps
     double interval = 1e9 / fps; // nanoseconds in a second / fps
     long lastTime;
     long currentTime;
@@ -55,9 +56,11 @@ public class GamePanel extends JPanel implements Runnable
         {
 
             currentTime = System.nanoTime();
+            // nano seconds since last frame / nanoseconds for one frame = percentage of what frame ur in
             delta += (currentTime - lastTime) / interval;
             lastTime = currentTime;
 
+            // delta 100% into frame, new frame yay
             if(delta >= 1)
             {
                 update();
@@ -72,7 +75,7 @@ public class GamePanel extends JPanel implements Runnable
         
        // update player inputs
 
-        
+        // update all animations here
        
        // basic attack is left click + direction
        if(inputHandler.inputLeftClick && (inputHandler.inputX != 0 || inputHandler.inputY != 0))
