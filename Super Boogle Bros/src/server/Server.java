@@ -17,6 +17,7 @@ public class Server implements Runnable{
     private UdpServer udpServer;
 
     private Thread gameThread;
+    private ServerGameState gameState;
 
     public PlayerHandlerServer playerHandler;
     // holds ip and port of every player
@@ -29,6 +30,8 @@ public class Server implements Runnable{
         this.host = host;
         playerHandler = new PlayerHandlerServer();
         endpoints = new ArrayList<>();
+        gameState = new ServerGameState();
+
         try
         {
             this.tcpServer = new TcpServer(this, port, host);
@@ -54,11 +57,6 @@ public class Server implements Runnable{
     public void run()
     {
         
-
-        
-
-        
-
         // send what frame of what state player is in
     }
 

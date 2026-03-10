@@ -24,7 +24,7 @@ public class UdpClient implements Runnable{
 
     public void start() {
         sendPacket(UdpPacketWriter.newPlayerPacket(client.getId()));
-        System.out.println("Starting Udp Client");
+        //System.out.println("Starting Udp Client");
         new Thread(this).start();
     }
 

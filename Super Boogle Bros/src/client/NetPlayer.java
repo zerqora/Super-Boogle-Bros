@@ -4,9 +4,12 @@ import actions.PlayerCharacter;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Serializable;
 import javax.imageio.ImageIO;
 
-public class NetPlayer {
+public class NetPlayer implements Serializable{
+
+    private static final long serialVersionUID = 1L;
     
     public int id;
     public String name;

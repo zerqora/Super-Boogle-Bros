@@ -9,6 +9,5 @@ public class RemovePlayerPacket implements Serializable{
     public int id;
     public String name;
 
-
     
 }

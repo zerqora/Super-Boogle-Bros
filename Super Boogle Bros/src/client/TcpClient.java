@@ -7,7 +7,6 @@ import java.net.ConnectException;
 import java.net.Socket;
 import packets.AddPlayerPacket;
 import packets.RemovePlayerPacket;
-import server.PlayerHandlerServer;
 
 public class TcpClient implements Runnable
 {
@@ -49,7 +48,7 @@ public class TcpClient implements Runnable
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
 
-            listener = new EventListener(this);
+            listener = new EventListener(this.client, this);
 
             // send the packet that lets the server know a player has joined
 
@@ -112,6 +111,8 @@ public class TcpClient implements Runnable
                 Object data = in.readObject();
                 System.out.println(data);
                 listener.received(data);
+
+                
             } 
             catch(ClassNotFoundException | IOException e)
             {

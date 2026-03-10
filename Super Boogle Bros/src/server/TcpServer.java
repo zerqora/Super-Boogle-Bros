@@ -1,11 +1,14 @@
 package server;
 
+import client.NetPlayer;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import packets.AddPlayerPacket;
+import packets.GameStatePacket;
 import packets.NewChatPacket;
 import packets.ReceiveIDPacket;
 
@@ -104,11 +107,29 @@ public class TcpServer implements Runnable{
             while(PlayerHandlerServer.players.containsKey(newId)){
                 newId = (int) (Math.random() * 256);
             }
+
             System.out.println("New ID: " + newId + " to be added to the server");
             // tell the server to add a new player
             server.addPlayer((AddPlayerPacket) packet, newId);
             connection.sendObject(new ReceiveIDPacket(newId));
+
+            System.out.println("Attempting to send instance of gamestate to client");
+
+            // collect all the player ids on the server side to send to client
+
+            
+            ArrayList<Integer> ids = new ArrayList();
+            for(Endpoint ep : server.endpoints)
+            {
+                ids.add(ep.getId());
+            }
+
+            System.out.println(ids.size());
+
+            connection.sendObject(new GameStatePacket(newId, ids, (HashMap<Integer, NetPlayer>) PlayerHandlerServer.players.clone())); // sends over a copy of the gamestate
+
             broadcastToAllConnections(packet);
+
         }
         if (packet instanceof NewChatPacket){
             System.out.println("Received New Chat Packet");

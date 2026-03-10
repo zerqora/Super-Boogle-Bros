@@ -1,8 +1,6 @@
 package server;
 
 import client.NetPlayer;
-
-import java.net.InetAddress;
 import java.util.HashMap;
 
 
