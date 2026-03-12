@@ -3,7 +3,6 @@ package server;
 import client.NetPlayer;
 import client.UdpPacketType;
 import client.UdpPacketWriter;
-
 import java.io.IOException;
 import java.net.*;
 import java.util.Arrays;
@@ -78,10 +77,8 @@ public class UdpServer implements Runnable {
                 System.out.println("Putting the new address in the player handler");
                 // create a new Endpoint object that holds the players' ip and port. This keeps track of how packets can be broadcasted from server to client.
                 server.addNewEndpoint(packetPlayerId, senderAddress, senderPort);
-                
-
-                
                 break;
+                
             case MOVE:
                 NetPlayer player = server.playerHandler.getPlayer(packetPlayerId);
                 if(player == null){
@@ -93,6 +90,7 @@ public class UdpServer implements Runnable {
                 handleMovement(player, dx, dy);
 
                 break;
+                
             case BASIC_ATTACK:
                 break;
         }

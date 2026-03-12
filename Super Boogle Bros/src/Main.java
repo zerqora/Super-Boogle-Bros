@@ -77,6 +77,15 @@ public class Main {
 
                     client.gamePanel.startGameThread();
 
+
+                    // System.out.println();
+                    // System.out.println("SECOND CLIENT");
+                    // // second client for test
+                    // Client client2 = new Client("10.10.15.79");
+                    // client2.connectSockets();
+                    // window.add(client2.gamePanel);
+                    // client2.gamePanel.startGameThread();
+
                     while (true) {
                         String word = scanner.nextLine();
                         client.sendObjectTcp(new NewChatPacket(word));
