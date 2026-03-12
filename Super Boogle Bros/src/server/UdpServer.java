@@ -7,7 +7,7 @@ import client.UdpPacketWriter;
 import java.io.IOException;
 import java.net.*;
 import java.util.Arrays;
-
+import java.nio.ByteBuffer;
 public class UdpServer implements Runnable {
 
     // Every packet is sent to this socket.
@@ -67,8 +67,9 @@ public class UdpServer implements Runnable {
     }
 
     public void handlePacket(byte[] data, InetAddress senderAddress, int senderPort) throws IOException {
-        int packetTypeId = data[0] & 0xFF; // important for byte conversion
-        int packetPlayerId = data[1] & 0xFF;
+        ByteBuffer buffer = ByteBuffer.wrap(data);
+        int packetTypeId = buffer.get(0); // important for byte conversion
+        int packetPlayerId = buffer.get(1);
 
         UdpPacketType type = UdpPacketType.getTypeFromId(packetTypeId);
 
@@ -87,8 +88,8 @@ public class UdpServer implements Runnable {
                     System.out.println("Player with ID " + packetPlayerId + " not found");
                     break;
                 }
-                int dx = data[2] & 0xFF;
-                int dy = data[3] & 0xFF;
+                int dx = buffer.get(2);
+                int dy = buffer.get(3);
                 handleMovement(player, dx, dy);
 
                 break;
@@ -100,6 +101,7 @@ public class UdpServer implements Runnable {
     public void handleMovement(NetPlayer player, int dx, int dy) {
         if (!colliding(player)) {
             // the client should interpolate this smoothly when drawing. the server simply holds the true value of the player's position
+            System.out.println(dx);
             player.posX += dx;
             player.posY += dy;
             System.out.println("Player " + player.name + "'s new position is " + player.posX + ", " + player.posY);

@@ -3,7 +3,7 @@ package client;
 import java.io.IOException;
 import java.net.*;
 import java.util.Arrays;
-
+import java.nio.ByteBuffer;
 public class UdpClient implements Runnable{
     // Notice how the UDP client doesn't hold who this belongs to. Each packet should have the player ID be sent with the byte array.
     private DatagramSocket socket;
@@ -41,7 +41,9 @@ public class UdpClient implements Runnable{
     }
 
     public void receivePacket(byte[] packet) {
-        int packetTypeId = packet[0] & 0xFF;
+
+        ByteBuffer buffer = ByteBuffer.wrap(packet);
+        int packetTypeId = buffer.getInt(0);
         UdpPacketType type = UdpPacketType.getTypeFromId(packetTypeId);
         System.out.println("Receiving packet from the server: " + Arrays.toString(packet));
         // server should send data back to the client so it knows what to draw
