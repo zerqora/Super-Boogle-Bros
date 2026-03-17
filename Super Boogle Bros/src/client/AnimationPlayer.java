@@ -12,7 +12,7 @@ public class AnimationPlayer {
     private BufferedImage[] currentAnimation;
     private int currentFrame;
     private BufferedImage currentImage;
-    final int fps = 12;
+    final int fps = 15;
 
 
     public int frameTimer = 0;
@@ -41,6 +41,7 @@ public class AnimationPlayer {
         frameTimer++;
         if (frameTimer == fps){
             currentFrame++;
+            frameTimer = 0;
         }
     }
 

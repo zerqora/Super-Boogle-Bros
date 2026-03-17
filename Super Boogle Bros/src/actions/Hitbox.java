@@ -25,7 +25,7 @@ public class Hitbox
         this.width = width;
         this.height = height;
 
-        this.hitbox = new Rectangle.Float(offsetX, offsetY, width, height); // WORK HERE MAKE THIS RIGHT I KINNNNDA FORGOT HOW
+        this.hitbox = new Rectangle.Float(offsetX, offsetY, width, height);
 
         this.damage = damage;
         this.knockback = knockback;

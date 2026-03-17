@@ -43,6 +43,16 @@ public class UdpPacketWriter {
         return packet;
     }
 
+    public static byte[] newBasicAttackPacket(int playerID, int direction)
+    {
+        byte[] packet = new byte[4];
+        packet[0] = (byte)UdpPacketType.BASIC_ATTACK.getId();
+        packet[1] = (byte)playerID;
+        packet[2] = (byte)direction;
+
+        return packet;
+    }
+
     
 
 

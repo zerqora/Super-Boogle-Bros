@@ -14,13 +14,13 @@ public class NetPlayer implements Serializable{
     public int id;
     public String name;
 
-    public float posX, posY;
+    public float posX, posY; // top left
     public float width, height;
 
     public int health = 200;
     public PlayerCharacter character;
 
-    BufferedImage image;
+    public BufferedImage image;
 
     public NetPlayer(int id, String name)
     {

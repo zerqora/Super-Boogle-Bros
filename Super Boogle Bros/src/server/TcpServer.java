@@ -75,7 +75,7 @@ public class TcpServer implements Runnable{
     // Initialize any new connections to the server
     private void iniSocket(Socket socket) {
         Connection connection = new Connection(socket, this );
-        System.out.println("Connection Established");
+        //System.out.println("Connection Established");
         connections.add(connection);
         new Thread(connection).start();
     }
@@ -108,12 +108,12 @@ public class TcpServer implements Runnable{
                 newId = (int) (Math.random() * 256);
             }
 
-            System.out.println("New ID: " + newId + " to be added to the server");
+            //System.out.println("New ID: " + newId + " to be added to the server");
             // tell the server to add a new player
             server.addPlayer((AddPlayerPacket) packet, newId);
             connection.sendObject(new ReceiveIDPacket(newId));
 
-            System.out.println("Attempting to send instance of gamestate to client");
+            //System.out.println("Attempting to send instance of gamestate to client");
 
             // collect all the player ids on the server side to send to client
 
@@ -124,7 +124,7 @@ public class TcpServer implements Runnable{
                 ids.add(ep.getId());
             }
 
-            System.out.println(ids.size());
+            //System.out.println(ids.size());
 
             connection.sendObject(new GameStatePacket(newId, ids, (HashMap<Integer, NetPlayer>) PlayerHandlerServer.players.clone())); // sends over a copy of the gamestate
 

@@ -27,7 +27,7 @@ public class UdpServer implements Runnable {
     @Override
     public void run() 
     {
-        System.out.println("UDP Server listening on port " + serverPort);
+        //System.out.println("UDP Server listening on port " + serverPort);
 
         while (true) {
             try {
@@ -57,7 +57,7 @@ public class UdpServer implements Runnable {
 
     public void start() {
         new Thread(this).start();
-        System.out.println("UDP Server Started");
+        //System.out.println("UDP Server Started");
     }
 
     public void sendPacket(byte[] data, InetAddress destination, int port) throws IOException {
@@ -74,7 +74,7 @@ public class UdpServer implements Runnable {
 
         switch(type){
             case NEW_PLAYER:
-                System.out.println("Putting the new address in the player handler");
+                //System.out.println("Putting the new address in the player handler");
                 // create a new Endpoint object that holds the players' ip and port. This keeps track of how packets can be broadcasted from server to client.
                 server.addNewEndpoint(packetPlayerId, senderAddress, senderPort);
                 break;
@@ -92,6 +92,8 @@ public class UdpServer implements Runnable {
                 break;
                 
             case BASIC_ATTACK:
+
+                System.out.println("whahaa");
                 break;
         }
     }

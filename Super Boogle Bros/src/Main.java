@@ -88,6 +88,15 @@ public class Main {
 
                     while (true) {
                         String word = scanner.nextLine();
+                        
+                        /* 
+                        if(word.charAt(0) == 'S')
+                        {
+                            
+                            server.endpoints.get(Integer.parseInt(word.substring(1, word.length() - 1)));
+                        }
+                         */
+
                         client.sendObjectTcp(new NewChatPacket(word));
                     }
                 } catch (Exception e) {
