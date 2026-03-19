@@ -16,6 +16,7 @@ public class NetPlayer implements Serializable{
 
     public float posX, posY; // top left
     public float width, height;
+    public float velX, velY; // server side use only
 
     public int health = 200;
     public PlayerCharacter character;
@@ -63,11 +64,6 @@ public class NetPlayer implements Serializable{
         return new float[]{(float)posX, (float)posY};
     }
 
-    
-    public void update(float posX, float posY)
-    {
-
-    }
 
     public void setImage(String image)
     {

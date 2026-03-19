@@ -13,11 +13,10 @@ public class GamePanel extends JPanel implements Runnable
     private InputHandler inputHandler;
 
     Client client;
-    NetPlayer player;
+    
     public GamePanel(Client client)
     {
         this.client = client;
-        this.player = new NetPlayer();
         this.setPreferredSize(new Dimension((int)1000, (int)1000));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
@@ -99,11 +98,17 @@ public class GamePanel extends JPanel implements Runnable
     @Override
     public void paintComponent(Graphics graphic)
     {
-
         super.paintComponent(graphic);
         Graphics2D graphic2D = (Graphics2D) graphic;
 
-        player.draw(graphic2D);
+
+        for(Integer id : client.gameState.playerIds)
+        {
+            System.out.println("in gamepanel, id in playerIds " + id);
+            NetPlayer np = client.gameState.playerMap.get(id); // get the netPlayer from the gameState
+            np.draw(graphic2D);
+        }
+
         // class.draw(graphic2D), in the class, draw g2.drawImage(image, x, y, width, height)
 
         graphic2D.dispose();

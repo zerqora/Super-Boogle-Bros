@@ -5,8 +5,8 @@ import client.UdpPacketType;
 import client.UdpPacketWriter;
 import java.io.IOException;
 import java.net.*;
-import java.util.Arrays;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 public class UdpServer implements Runnable {
 
     // Every packet is sent to this socket.
@@ -70,6 +70,8 @@ public class UdpServer implements Runnable {
         int packetTypeId = buffer.get(0); // important for byte conversion
         int packetPlayerId = buffer.get(1);
 
+        System.out.println("packedplayerid " + packetPlayerId);
+
         UdpPacketType type = UdpPacketType.getTypeFromId(packetTypeId);
 
         switch(type){
@@ -93,7 +95,7 @@ public class UdpServer implements Runnable {
                 
             case BASIC_ATTACK:
 
-                System.out.println("whahaa");
+                System.out.println("Basic Attack");
                 break;
         }
     }
@@ -105,12 +107,20 @@ public class UdpServer implements Runnable {
             player.posX += dx;
             player.posY += dy;
             System.out.println("Player " + player.name + "'s new position is " + player.posX + ", " + player.posY);
-            server.broadcastToAllConnections(UdpPacketWriter.newPlayerPositionSnapShot(player.id, player.posX, player.posY));
-        }
 
+            try
+            {
+                server.broadcastBytesToAllConnections(UdpPacketWriter.newPlayerPositionSnapShot(player.id, player.posX, player.posY));
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            } 
+        }    
     }
 
-    public boolean colliding(NetPlayer player) {
+    public boolean colliding(NetPlayer player) 
+    {
         boolean collision = false;
         float playerX = player.posX;
         float playerY = player.posY;

@@ -1,5 +1,6 @@
 package client;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,6 +16,12 @@ public class GameState {
     { 
         this.playerMap = playerMap;
         this.playerIds = playerIds;
+    }
+
+    //from udp server
+    public void updatePosition(ByteBuffer buffer)
+    {
+        playerMap.get((int) buffer.get(1)).setPosition((int) buffer.get(2), (int) buffer.get(3));
     }
 
     

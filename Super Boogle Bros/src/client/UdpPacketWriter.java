@@ -48,7 +48,7 @@ public class UdpPacketWriter {
         byte[] packet = new byte[4];
         packet[0] = (byte)UdpPacketType.BASIC_ATTACK.getId();
         packet[1] = (byte)playerID;
-        packet[2] = (byte)direction;
+        packet[2] = (byte)direction; // this is from the moveDirections enum so it's standardized
 
         return packet;
     }

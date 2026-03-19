@@ -2,8 +2,8 @@ package client;
 
 import java.io.IOException;
 import java.net.*;
-import java.util.Arrays;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 public class UdpClient implements Runnable{
     // Notice how the UDP client doesn't hold who this belongs to. Each packet should have the player ID be sent with the byte array.
     private DatagramSocket socket;
@@ -46,9 +46,23 @@ public class UdpClient implements Runnable{
         int packetTypeId = buffer.getInt(0);
         UdpPacketType type = UdpPacketType.getTypeFromId(packetTypeId);
         System.out.println("Receiving packet from the server: " + Arrays.toString(packet));
+
+        handlePacket(packet);
         // server should send data back to the client so it knows what to draw
 
         
+    }
+
+    public void handlePacket(byte[] packet)
+    {
+        ByteBuffer buffer = ByteBuffer.wrap(packet);
+        int packetTypeId = buffer.get(0); // important for byte conversion
+        int packetPlayerId = buffer.get(1);
+
+        if(packetTypeId == UdpPacketType.POSITION.getId())
+        {
+            client.gameState.updatePosition(buffer);
+        }
     }
 
     @Override
