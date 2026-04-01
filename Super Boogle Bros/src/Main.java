@@ -61,7 +61,7 @@ public class Main {
                 server.startServers();
 
                 try {
-                    Client client = new Client("10.10.15.79");
+                    Client client = new Client("10.10.166.53");
                     client.connectSockets();
                     JFrame window = new JFrame();
                     window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

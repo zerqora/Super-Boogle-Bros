@@ -104,7 +104,7 @@ public class GamePanel extends JPanel implements Runnable
 
         for(Integer id : client.gameState.playerIds)
         {
-            System.out.println("in gamepanel, id in playerIds " + id);
+            //System.out.println("in gamepanel, id in playerIds " + id);
             NetPlayer np = client.gameState.playerMap.get(id); // get the netPlayer from the gameState
             np.draw(graphic2D);
         }

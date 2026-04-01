@@ -36,7 +36,7 @@ public class UdpServer implements Runnable {
 
                 int length = packet.getLength();
                 byte[] data = Arrays.copyOf(packet.getData(), length);
-
+                //System.out.println("ID copied: " + (int) data[1]);
                 InetAddress senderAddress = packet.getAddress();
                 int senderPort = packet.getPort();
 
@@ -66,9 +66,12 @@ public class UdpServer implements Runnable {
     }
 
     public void handlePacket(byte[] data, InetAddress senderAddress, int senderPort) throws IOException {
+        //for (int i = 0; i < data.length; i++) {
+            //System.out.println("Byte " + i + ": " + (data[i] & 0xFF));
+        //}
         ByteBuffer buffer = ByteBuffer.wrap(data);
-        int packetTypeId = buffer.get(0); // important for byte conversion
-        int packetPlayerId = buffer.get(1);
+        int packetTypeId = buffer.get() & 0xFF; // important for byte conversion
+        int packetPlayerId = buffer.get() & 0xFF;
 
         System.out.println("packedplayerid " + packetPlayerId);
 

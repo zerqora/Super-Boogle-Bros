@@ -35,6 +35,7 @@ public class Client
     }
 
     public int getId(){
+        //System.out.println("Getting ID " + id);
         return id;
     }
 

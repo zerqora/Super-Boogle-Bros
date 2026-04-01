@@ -32,6 +32,7 @@ public class EventListener {
             System.out.println(packet.name + " has quit the game");
         }
         else if(p instanceof ReceiveIDPacket packet){
+            System.out.println("Received packet RecieveIDPacket " + packet.getID());
             tcpClient.setID(packet.getID());
         }
         else if(p instanceof GameStatePacket packet)

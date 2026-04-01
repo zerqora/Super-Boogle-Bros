@@ -38,6 +38,7 @@ public class TcpClient implements Runnable
     }
     public void setID(int id){
         client.setId(id);
+        System.out.println("ID set to " + id);
     }
     // connects to the server, making a socket, and input and output streams
     // also begins a thread on the client-side
