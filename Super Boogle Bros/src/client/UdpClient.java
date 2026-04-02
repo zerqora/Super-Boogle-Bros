@@ -56,8 +56,7 @@ public class UdpClient implements Runnable{
     public void handlePacket(byte[] packet)
     {
         ByteBuffer buffer = ByteBuffer.wrap(packet);
-        int packetTypeId = buffer.get(0); // important for byte conversion
-        int packetPlayerId = buffer.get(1);
+        int packetTypeId = buffer.get() &0xff;  // important for byte conversion
 
         if(packetTypeId == UdpPacketType.POSITION.getId())
         {

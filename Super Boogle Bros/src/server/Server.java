@@ -79,6 +79,7 @@ public class Server implements Runnable{
         Endpoint endpoint = new Endpoint(id, ip, port);
         endpoints.add(endpoint);
         System.out.println("New Endpoint Added");
+
         // print it out
         for(Endpoint ep : endpoints){
             System.out.println(ep.getId() + ": " + ep.getIp() + ", " + ep.getPort());
@@ -94,4 +95,5 @@ public class Server implements Runnable{
             udpServer.sendPacket(packet, ep.getIp(), ep.getPort());
         }
     }
+
 }

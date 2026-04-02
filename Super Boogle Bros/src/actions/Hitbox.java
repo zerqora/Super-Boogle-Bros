@@ -7,6 +7,8 @@ public class Hitbox
     
     // offsets from the origin of the player (top left corner)
 
+    //this is one frame of a longer animation, the longer animation is the hitboxData class
+
     public float offsetX, offsetY;
     public int width, height;
 
@@ -30,6 +32,13 @@ public class Hitbox
         this.damage = damage;
         this.knockback = knockback;
         this.angle = angle;
+        
+    }
+
+    public Hitbox()
+    {
+        //this is a template
+
         
     }
 

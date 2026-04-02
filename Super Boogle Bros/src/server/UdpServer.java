@@ -73,7 +73,7 @@ public class UdpServer implements Runnable {
         int packetTypeId = buffer.get() & 0xFF; // important for byte conversion
         int packetPlayerId = buffer.get() & 0xFF;
 
-        System.out.println("packedplayerid " + packetPlayerId);
+        System.out.println("in udpserver, packedplayerid " + packetPlayerId);
 
         UdpPacketType type = UdpPacketType.getTypeFromId(packetTypeId);
 

@@ -10,7 +10,9 @@ public class HitboxData
     // priority goes to the earlier hitboxes, so [frame][0] takes priority over [frame][1]
     
     Hitbox[][] hitboxes; 
-    String moveName;
+    int moveID;
+
+
     
     public HitboxData()
     {

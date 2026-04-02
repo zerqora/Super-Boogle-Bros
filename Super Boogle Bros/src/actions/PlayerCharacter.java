@@ -12,6 +12,13 @@ public class PlayerCharacter
     public PlayerCharacter(NetPlayer wanker)
     {
        
+        
+    }
+
+    public void initializeHitboxes()
+    {
+
+
     }
 
     public void setAction(byte[] data)

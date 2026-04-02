@@ -21,7 +21,15 @@ public class GameState {
     //from udp server
     public void updatePosition(ByteBuffer buffer)
     {
-        playerMap.get((int) buffer.get(1)).setPosition((int) buffer.get(2), (int) buffer.get(3));
+        
+        int packetPlayerId = buffer.get() &0xff;
+        int poxX = buffer.get() &0xff;
+        int posY = buffer.get() &0xff;
+        
+        System.out.println("In client gamestate, posx and posy, x " + poxX + ", y " + posY);
+        
+
+        playerMap.get(packetPlayerId).setPosition(poxX, posY);
     }
 
     
