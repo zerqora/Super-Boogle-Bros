@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.imageio.ImageIO;
 
 public class NetPlayer implements Serializable{
@@ -82,7 +83,7 @@ public class NetPlayer implements Serializable{
 
         try 
         {
-            this.image = ImageIO.read(getClass().getResourceAsStream("/greatimages/TestGuy.png"));
+            this.image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/greatimages/TestGuy.png")));
             g2.drawImage(image, (int) posX, (int) posY, (int) width, (int) height, null);
         } 
         catch (IOException e) {}

@@ -23,13 +23,16 @@ public class GameState {
     {
         
         int packetPlayerId = buffer.get() &0xff;
-        int poxX = buffer.get() &0xff;
+        int posX = buffer.get() &0xff;
         int posY = buffer.get() &0xff;
-        
-        System.out.println("In client gamestate, posx and posy, x " + poxX + ", y " + posY);
+
+        // W CODE
+        int drawnPosX = posX * 4;
+        int drawnPosY = posY * 4;
+        System.out.println("In client gamestate, posx and posy, x " + drawnPosX + ", y " + drawnPosY);
         
 
-        playerMap.get(packetPlayerId).setPosition(poxX, posY);
+        playerMap.get(packetPlayerId).setPosition(drawnPosX, drawnPosY);
     }
 
     
@@ -41,6 +44,7 @@ public class GameState {
     }
 
 }
+
 
 
 
