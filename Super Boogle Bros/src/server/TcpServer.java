@@ -124,6 +124,8 @@ public class TcpServer implements Runnable{
                 ids.add(ep.getId());
             }
 
+            ids.add(newId); // ---------------------------------------
+
             //System.out.println(ids.size());
 
             connection.sendObject(new GameStatePacket(newId, ids, (HashMap<Integer, NetPlayer>) PlayerHandlerServer.players.clone())); // sends over a copy of the gamestate

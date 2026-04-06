@@ -37,6 +37,8 @@ public class EventListener {
         }
         else if(p instanceof GameStatePacket packet)
         {
+            // ISSUE -> ids is empty when the first (or maybe all) gamestate packet is sent out.
+
             
             // this is only called once and alligns the server and client sides
             client.gameState = new GameState(packet.ids, packet.players);
