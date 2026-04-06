@@ -124,7 +124,7 @@ public class TcpServer implements Runnable{
                 ids.add(ep.getId());
             }
 
-            ids.add(newId); // ---------------------------------------
+            ids.add(newId); // this is because the endpoint wasnt made yet
 
             //System.out.println(ids.size());
 
