@@ -40,6 +40,7 @@ public class Client
     }
 
     public void setId(int id){
+        udpClient.sendPacket(UdpPacketWriter.newPlayerPacket(id));
         this.id = id;
     }
 

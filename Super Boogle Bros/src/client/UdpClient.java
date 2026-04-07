@@ -23,7 +23,7 @@ public class UdpClient implements Runnable{
     }
 
     public void start() {
-        sendPacket(UdpPacketWriter.newPlayerPacket(client.getId()));
+
         //System.out.println("Starting Udp Client");
         new Thread(this).start();
     }
@@ -42,9 +42,6 @@ public class UdpClient implements Runnable{
 
     public void receivePacket(byte[] packet) {
 
-        ByteBuffer buffer = ByteBuffer.wrap(packet);
-        int packetTypeId = buffer.getInt(0);
-        UdpPacketType type = UdpPacketType.getTypeFromId(packetTypeId);
         System.out.println("Receiving packet from the server: " + Arrays.toString(packet));
 
         handlePacket(packet);
@@ -56,11 +53,14 @@ public class UdpClient implements Runnable{
     public void handlePacket(byte[] packet)
     {
         ByteBuffer buffer = ByteBuffer.wrap(packet);
-        int packetTypeId = buffer.get() &0xff;  // important for byte conversion
+        int packetTypeId = (int) buffer.get() & 0xff;  // important for byte conversion
 
         if(packetTypeId == UdpPacketType.POSITION.getId())
         {
             client.gameState.updatePosition(buffer);
+        }
+        if(packetTypeId == UdpPacketType.NEW_PLAYER.getId()){
+            client.gameState.addPlayer(buffer);
         }
     }
 

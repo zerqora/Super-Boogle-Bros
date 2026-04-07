@@ -22,25 +22,32 @@ public class GameState {
     public void updatePosition(ByteBuffer buffer)
     {
         
-        int packetPlayerId = buffer.get() &0xff;
-        int posX = buffer.get() &0xff;
-        int posY = buffer.get() &0xff;
+        int packetPlayerId = (int) buffer.get() & 0xff;
+        int posX = (int) buffer.get() & 0xff;
+        int posY = (int) buffer.get() & 0xff;
 
         // W CODE
         int drawnPosX = posX * 4;
         int drawnPosY = posY * 4;
         System.out.println("In client gamestate, posx and posy, x " + drawnPosX + ", y " + drawnPosY);
-        
 
+        System.out.println("Packet ID: " + packetPlayerId);
         playerMap.get(packetPlayerId).setPosition(drawnPosX, drawnPosY);
     }
 
     
 
     // adds a player to this gamestate when a new client is added to the server after this client is
-    public void addPlayer(int playerId, NetPlayer player)
+    public void addPlayer(ByteBuffer buffer)
     {
-        playerMap.put(playerId, player);
+        int id = (int) buffer.get() & 0xff;
+        NetPlayer player = playerMap.get(id);
+        System.out.println("Current Players in the Player Map: ");
+        for(NetPlayer plyr : playerMap.values()){
+            System.out.println(plyr.id);
+        }
+        playerMap.put(id, player);
+        System.out.println("NEW PLAYER ADDED TO GAMESTATE: " + id + " " + player);
     }
 
 }

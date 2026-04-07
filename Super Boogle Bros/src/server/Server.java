@@ -60,11 +60,10 @@ public class Server implements Runnable{
         // send what frame of what state player is in
     }
 
-    public void addPlayer(AddPlayerPacket packet, int id)
+    public void addPlayer(int id, NetPlayer player)
     {
         // add the player to a hashmap of more players by their id
-        NetPlayer newPlayer = new NetPlayer(id, packet.name);
-        playerHandler.put(id, newPlayer);
+        playerHandler.put(id, player);
 
 
     }
@@ -92,6 +91,7 @@ public class Server implements Runnable{
     // sends packet to all clients via UDP
     public void broadcastBytesToAllConnections(byte[] packet) throws IOException {
         for (Endpoint ep : endpoints) {
+            System.out.println("Sending UDP Packet to every endpoint : " + ep.getIp() + ", " + ep.getPort());
             udpServer.sendPacket(packet, ep.getIp(), ep.getPort());
         }
     }

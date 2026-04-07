@@ -22,8 +22,6 @@ public class EventListener {
     {
         if(p instanceof AddPlayerPacket packet)
         {
-            client.gameState.addPlayer(packet.id, new NetPlayer(packet.id, packet.name));
-
             System.out.println(packet.name + " has joined the game");
         }
         else if (p instanceof RemovePlayerPacket packet)

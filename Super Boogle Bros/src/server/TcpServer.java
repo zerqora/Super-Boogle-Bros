@@ -7,6 +7,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import client.UdpPacketWriter;
 import packets.AddPlayerPacket;
 import packets.GameStatePacket;
 import packets.NewChatPacket;
@@ -98,27 +100,25 @@ public class TcpServer implements Runnable{
     }
 
     // where packets come in from one connection.
-    public void handlePackets(Object packet, Connection connection){
-        if (packet instanceof AddPlayerPacket){
+    public void handlePackets(Object packet, Connection connection) throws IOException {
+        if (packet instanceof AddPlayerPacket newPacket){
             // later, the client's id should be pulled from a file or something so they can keep their data throughout multiple playthroughs
 
             // create a new id for the new player
-            int newId = (int) (Math.random() * 128);
-            while(PlayerHandlerServer.players.containsKey(newId)){
-                newId = (int) (Math.random() * 128);
-            }
+            int newId = getNewID();
 
-            //System.out.println("New ID: " + newId + " to be added to the server");
-            // tell the server to add a new player
-            server.addPlayer((AddPlayerPacket) packet, newId);
+
+            // tell the client their ID
             connection.sendObject(new ReceiveIDPacket(newId));
 
-            //System.out.println("Attempting to send instance of gamestate to client");
+            // tell the server to add a new player
+            NetPlayer player = new NetPlayer(newId, newPacket.name);
+            server.addPlayer(newId, player);
+            server.broadcastBytesToAllConnections(UdpPacketWriter.newPlayerPacket(newId));
 
             // collect all the player ids on the server side to send to client
 
-            
-            ArrayList<Integer> ids = new ArrayList();
+            ArrayList<Integer> ids = new ArrayList<>();
             for(Endpoint ep : server.endpoints)
             {
                 ids.add(ep.getId());
@@ -129,7 +129,6 @@ public class TcpServer implements Runnable{
             //System.out.println(ids.size());
 
             connection.sendObject(new GameStatePacket(newId, ids, (HashMap<Integer, NetPlayer>) PlayerHandlerServer.players.clone())); // sends over a copy of the gamestate
-
             broadcastToAllConnections(packet);
 
         }
@@ -138,5 +137,13 @@ public class TcpServer implements Runnable{
             broadcastToAllConnections(packet);
         }
         System.out.println(packet);
+    }
+
+    public int getNewID(){
+        int newId = (int) (Math.random() * 128);
+        while(PlayerHandlerServer.players.containsKey(newId)){
+            newId = (int) (Math.random() * 128);
+        }
+        return newId;
     }
 }
