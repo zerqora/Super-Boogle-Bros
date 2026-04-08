@@ -1,14 +1,13 @@
 package server;
 
 import client.NetPlayer;
+import client.UdpPacketWriter;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import client.UdpPacketWriter;
 import packets.AddPlayerPacket;
 import packets.GameStatePacket;
 import packets.NewChatPacket;
@@ -111,16 +110,17 @@ public class TcpServer implements Runnable{
             // tell the client their ID
             connection.sendObject(new ReceiveIDPacket(newId));
 
+            //System.out.println("Attempting to send instance of gamestate to client");
             // tell the server to add a new player
             NetPlayer player = new NetPlayer(newId, newPacket.name);
             server.addPlayer(newId, player);
             server.broadcastBytesToAllConnections(UdpPacketWriter.newPlayerPacket(newId));
-
             // collect all the player ids on the server side to send to client
 
             ArrayList<Integer> ids = new ArrayList<>();
             for(Endpoint ep : server.endpoints)
             {
+                System.out.println("IN TCPSERVER " + ep.getId());
                 ids.add(ep.getId());
             }
 

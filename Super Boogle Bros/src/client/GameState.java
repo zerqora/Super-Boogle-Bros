@@ -31,8 +31,26 @@ public class GameState {
         int drawnPosY = posY * 4;
         System.out.println("In client gamestate, posx and posy, x " + drawnPosX + ", y " + drawnPosY);
 
-        System.out.println("Packet ID: " + packetPlayerId);
-        playerMap.get(packetPlayerId).setPosition(drawnPosX, drawnPosY);
+        try
+        {
+            System.out.println("IN GAMESTATE : PLAYERPACKETID : " + packetPlayerId);
+            System.out.println(playerMap.keySet().toArray()[0]);
+                    System.out.println("Packet ID: " + packetPlayerId);
+            if(playerMap.containsKey(packetPlayerId))
+            {
+                System.out.println("Contains Id!");
+                playerMap.get(packetPlayerId).setPosition(drawnPosX, drawnPosY);
+            }
+            else
+            {
+                System.out.println("does not contain id");
+            }
+        }
+        catch(NullPointerException e)
+        {
+            System.out.println("ERROR ERROR ERROR ERROR");
+            e.printStackTrace();
+        }
     }
 
     

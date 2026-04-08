@@ -65,8 +65,8 @@ public class Server implements Runnable{
         // add the player to a hashmap of more players by their id
         playerHandler.put(id, player);
 
-
     }
+    
     public void addNewEndpoint(int id, InetAddress ip, int port){
         // Do not add a new endpoint if it already exists
         for (Endpoint ep : endpoints){
@@ -74,6 +74,7 @@ public class Server implements Runnable{
                 return;
             }
         }
+
         // create a new endpoint that holds the player's ip and port
         Endpoint endpoint = new Endpoint(id, ip, port);
         endpoints.add(endpoint);

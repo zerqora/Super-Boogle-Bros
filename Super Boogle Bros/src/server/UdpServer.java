@@ -113,6 +113,7 @@ public class UdpServer implements Runnable {
 
             try
             {
+                System.out.println("Broadcasting to all connections");
                 server.broadcastBytesToAllConnections(UdpPacketWriter.newPlayerPositionSnapShot(player.id, player.posX, player.posY));
             }
             catch(IOException e)
