@@ -14,7 +14,7 @@ public class GameStatePacket implements Serializable{
     public HashMap<Integer, NetPlayer> players;
     public ArrayList<Integer> ids;
 
-    public GameStatePacket(int id, ArrayList<Integer> ids, HashMap<Integer, NetPlayer> players)
+    public GameStatePacket(ArrayList<Integer> ids, HashMap<Integer, NetPlayer> players)
     {
         this.players = players;
         this.ids = ids;

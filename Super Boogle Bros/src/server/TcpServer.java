@@ -7,9 +7,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 import packets.AddPlayerPacket;
-import packets.GameStatePacket;
 import packets.NewChatPacket;
 import packets.ReceiveIDPacket;
 
@@ -117,23 +115,16 @@ public class TcpServer implements Runnable{
             server.broadcastBytesToAllConnections(UdpPacketWriter.newPlayerPacket(newId));
             // collect all the player ids on the server side to send to client
 
-            ArrayList<Integer> ids = new ArrayList<>();
-            for(Endpoint ep : server.endpoints)
-            {
-                System.out.println("IN TCPSERVER " + ep.getId());
-                ids.add(ep.getId());
-            }
-
-            ids.add(newId); // this is because the endpoint wasnt made yet
-
-            //System.out.println(ids.size());
-
-            connection.sendObject(new GameStatePacket(newId, ids, (HashMap<Integer, NetPlayer>) PlayerHandlerServer.players.clone())); // sends over a copy of the gamestate
-            broadcastToAllConnections(packet);
-
         }
         if (packet instanceof NewChatPacket){
             System.out.println("Received New Chat Packet");
+
+            NewChatPacket chatPacket = (NewChatPacket) packet;
+            if(chatPacket.message.equals("/start"))
+                {
+                    server.sendInitialGameState();
+                }
+
             broadcastToAllConnections(packet);
         }
         System.out.println(packet);

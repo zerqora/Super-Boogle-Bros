@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class GameState {
     
     public HashMap<Integer, NetPlayer> playerMap;
-    public ArrayList<Integer> playerIds;
+    public ArrayList<Integer> playerIds;       
 
 
     public GameState(){}
@@ -58,6 +58,9 @@ public class GameState {
     // adds a player to this gamestate when a new client is added to the server after this client is
     public void addPlayer(ByteBuffer buffer)
     {
+        try{
+
+        
         int id = (int) buffer.get() & 0xff;
         NetPlayer player = playerMap.get(id);
         System.out.println("Current Players in the Player Map: ");
@@ -66,6 +69,9 @@ public class GameState {
         }
         playerMap.put(id, player);
         System.out.println("NEW PLAYER ADDED TO GAMESTATE: " + id + " " + player);
+        }
+        catch(NullPointerException e)
+        {}
     }
 
 }

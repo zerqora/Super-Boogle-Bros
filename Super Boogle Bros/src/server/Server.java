@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
-import packets.AddPlayerPacket;
+import java.util.HashMap;
+import packets.GameStatePacket;
 
 public class Server implements Runnable{
     
@@ -58,6 +59,18 @@ public class Server implements Runnable{
     {
         
         // send what frame of what state player is in
+    }
+
+    public void sendInitialGameState()
+    {
+        ArrayList<Integer> ids = new ArrayList<>();
+        for(Endpoint ep : endpoints)
+        {
+            System.out.println("IN TCPSERVER " + ep.getId());
+            ids.add(ep.getId());
+        }
+
+        tcpServer.broadcastToAllConnections(new GameStatePacket(ids, (HashMap<Integer, NetPlayer>) PlayerHandlerServer.players.clone()));
     }
 
     public void addPlayer(int id, NetPlayer player)

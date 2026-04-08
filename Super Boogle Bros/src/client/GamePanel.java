@@ -101,14 +101,20 @@ public class GamePanel extends JPanel implements Runnable
         super.paintComponent(graphic);
         Graphics2D graphic2D = (Graphics2D) graphic;
 
+        if(client.gameState.playerMap == null)
+        {
+            return;
+        }
 
         for(Integer id : client.gameState.playerIds)
         {
             //System.out.println("in gamepanel, id in playerIds " + id);
 
         
-            NetPlayer np = client.gameState.playerMap.get(id); // get the netPlayer from the gameState
-            np.draw(graphic2D);
+                NetPlayer np = client.gameState.playerMap.get(id); // get the netPlayer from the gameState
+                np.draw(graphic2D);
+            
+            
         }
 
         // class.draw(graphic2D), in the class, draw g2.drawImage(image, x, y, width, height)
