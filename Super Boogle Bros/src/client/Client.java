@@ -1,5 +1,6 @@
 package client;
 
+import javax.swing.*;
 import java.net.InetAddress;
 
 public class Client 
@@ -20,12 +21,7 @@ public class Client
             
             tcpClient = new TcpClient(this, serverAddress, 3080); //initialize both connections to the server as well as the gamepanel
             udpClient = new UdpClient(this, InetAddress.getByName("127.0.0.1"), 7777);
-            gamePanel = new GamePanel(this);
             inputHandler = new InputHandler(this);
-            gameState = new GameState();
-            
-
-            gamePanel.addNewListener(inputHandler);
 
         }
         catch(Exception e)
@@ -57,6 +53,12 @@ public class Client
         
     }
 
+    public void initializeGamePanel(GameState gameState)
+    {
+        gamePanel = new GamePanel(this, gameState);
+        gamePanel.addNewListener(inputHandler);
+    }
+
     public void sendObjectTcp(Object packet)
     {
         tcpClient.sendObject(packet);
@@ -66,6 +68,25 @@ public class Client
         udpClient.sendPacket(packet);
     }
 
-    
-    
+
+    public void createWindow() {
+        JFrame window = new JFrame();
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        window.setTitle("BOOOOGLE YOOOOO");
+
+        window.add(gamePanel);
+
+        window.pack();
+
+        window.setVisible(true);
+        window.setLocationRelativeTo(null);
+
+        gamePanel.startGameThread();
+
+    }
+
+    public void initializeGameState(GameState gameState) {
+        this.gameState = gameState;
+    }
 }

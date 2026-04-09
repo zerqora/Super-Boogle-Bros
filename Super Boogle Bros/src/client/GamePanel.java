@@ -11,15 +11,17 @@ public class GamePanel extends JPanel implements Runnable
     
     private Thread gameThread;
     private InputHandler inputHandler;
-
+    private GameState gameState;
     Client client;
     
-    public GamePanel(Client client)
+    public GamePanel(Client client, GameState gameState)
     {
         this.client = client;
+        this.gameState = gameState;
         this.setPreferredSize(new Dimension((int)1000, (int)1000));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
+
     }
 
     public void addNewListener(InputHandler inputHandler){
@@ -101,17 +103,17 @@ public class GamePanel extends JPanel implements Runnable
         super.paintComponent(graphic);
         Graphics2D graphic2D = (Graphics2D) graphic;
 
-        if(client.gameState.playerMap == null)
+        if(gameState.playerMap == null)
         {
             return;
         }
 
-        for(Integer id : client.gameState.playerIds)
+        for(Integer id : gameState.playerIds)
         {
             //System.out.println("in gamepanel, id in playerIds " + id);
 
         
-                NetPlayer np = client.gameState.playerMap.get(id); // get the netPlayer from the gameState
+                NetPlayer np = gameState.playerMap.get(id); // get the netPlayer from the gameState
                 np.draw(graphic2D);
             
             

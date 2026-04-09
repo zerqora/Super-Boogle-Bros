@@ -10,8 +10,6 @@ public class GameState {
     public ArrayList<Integer> playerIds;       
 
 
-    public GameState(){}
-
     public GameState(ArrayList<Integer> playerIds, HashMap<Integer, NetPlayer> playerMap)
     { 
         this.playerMap = playerMap;
@@ -35,7 +33,7 @@ public class GameState {
         {
             System.out.println("IN GAMESTATE : PLAYERPACKETID : " + packetPlayerId);
             System.out.println(playerMap.keySet().toArray()[0]);
-                    System.out.println("Packet ID: " + packetPlayerId);
+            System.out.println("Packet ID: " + packetPlayerId);
             if(playerMap.containsKey(packetPlayerId))
             {
                 System.out.println("Contains Id!");
