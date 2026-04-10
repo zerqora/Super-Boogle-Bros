@@ -13,6 +13,7 @@ public class NetPlayer implements Serializable{
 
     private static final long serialVersionUID = 1L;
     
+    public final float GRAVITY = 1.02f;
     public int id;
     public String name;
 
@@ -25,6 +26,8 @@ public class NetPlayer implements Serializable{
 
     public BufferedImage image;
     public Rectangle2D hitbox;
+
+    public boolean isOnGround = false;
 
     public NetPlayer(int id, String name)
     {
@@ -79,6 +82,22 @@ public class NetPlayer implements Serializable{
         return new float[]{(float)posX, (float)posY};
     }
 
+
+    // server use only
+    public void updateGravity()
+    {
+        if(isOnGround)
+        {
+            return;
+        }
+        else if(velY == 0)
+        {
+            velY = 1;
+        }
+            
+        this.velY *= GRAVITY;
+        posY += velY;
+    }
 
 
 

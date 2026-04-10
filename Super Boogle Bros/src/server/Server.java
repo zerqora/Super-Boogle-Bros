@@ -29,9 +29,9 @@ public class Server implements Runnable{
     {
         this.port = port;
         this.host = host;
-        playerHandler = new PlayerHandlerServer();
+        playerHandler = new PlayerHandlerServer(this);
         endpoints = new ArrayList<>();
-        gameState = new ServerGameState();
+        gameState = new ServerGameState(this);
 
         try
         {
@@ -49,16 +49,6 @@ public class Server implements Runnable{
     {
         this.tcpServer.start();
         this.udpServer.start();
-        
-        gameThread = new Thread(this);
-        gameThread.start();
-    }
-
-    @Override
-    public void run()
-    {
-        
-        // send what frame of what state player is in
     }
 
     public void sendInitialGameState()
@@ -71,6 +61,47 @@ public class Server implements Runnable{
         }
 
         tcpServer.broadcastToAllConnections(new GameStatePacket(ids, (HashMap<Integer, NetPlayer>) PlayerHandlerServer.players.clone()));
+
+        gameThread = new Thread(this);
+        gameThread.start();
+    }
+
+    int fps = 60;
+    double delta;
+    // how many nano seconds for one frame if it is 60 fps
+    double interval = 1e9 / fps; // nanoseconds in a second / fps
+    long lastTime;
+    long currentTime;
+
+    @Override
+    public void run()
+    {
+        // yooo look i copied from game state isnt that lovely?
+
+        delta = 0;
+        lastTime = System.nanoTime();
+
+        while(gameThread != null)
+        {
+
+            currentTime = System.nanoTime();
+            // nano seconds since last frame / nanoseconds for one frame = percentage of what frame ur in
+            delta += (currentTime - lastTime) / interval;
+            lastTime = currentTime;
+
+            // delta 100% into frame, new frame yay
+            if(delta >= 1)
+            {
+                update();
+                delta--;
+            }
+        }
+        
+    }
+
+    public void update()
+    {
+        gameState.updateGravity();
     }
 
     public void addPlayer(int id, NetPlayer player)

@@ -1,25 +1,39 @@
 package server;
 
 import client.NetPlayer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import client.UdpPacketWriter;
+import java.io.IOException;
 
 public class ServerGameState {
     
-    public Map<Integer, NetPlayer> playerMap;
-    public ArrayList<Integer> playerIds;
+    
+    public Server server;
+    public PlayerHandlerServer playerHandler;
 
-    public ServerGameState()
+    public ServerGameState(Server server)
     {
-        playerMap = new HashMap<>();
-        playerIds = new ArrayList();
-        
+        this.server = server;
+        playerHandler = this.server.playerHandler;
     }
 
-    public void addPlayer(int playerId, NetPlayer player)
+    public void updateGravity()
     {
-        playerMap.put(playerId, player);
+        for(Endpoint ep : server.endpoints)
+        {
+            int id = ep.getId();
+            NetPlayer player = playerHandler.players.get(id);
+
+            playerHandler.players.get(id).updateGravity();
+
+            try 
+            {
+            server.broadcastBytesToAllConnections(UdpPacketWriter.newPlayerPositionSnapShot(id, player.posX, player.posY));
+            }
+            catch(IOException e) {}
+
+            
+            
+        }
     }
     
 }
