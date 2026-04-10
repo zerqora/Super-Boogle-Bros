@@ -107,8 +107,9 @@ public class UdpServer implements Runnable {
         if (!colliding(player)) {
             // the client should interpolate this smoothly when drawing. the server simply holds the true value of the player's position
             System.out.println(dx);
-            player.posX += dx;
-            player.posY += dy;
+
+            player.movePosition(dx, dy);
+            
             System.out.println("Player " + player.name + "'s new position is " + player.posX + ", " + player.posY);
 
             try

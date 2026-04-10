@@ -18,7 +18,7 @@ public class GamePanel extends JPanel implements Runnable
     {
         this.client = client;
         this.gameState = gameState;
-        this.setPreferredSize(new Dimension((int)1000, (int)1000));
+        this.setPreferredSize(new Dimension((int)1000, (int)720));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
 

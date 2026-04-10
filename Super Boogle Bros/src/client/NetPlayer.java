@@ -2,6 +2,7 @@ package client;
 
 import actions.PlayerCharacter;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
@@ -23,6 +24,7 @@ public class NetPlayer implements Serializable{
     public PlayerCharacter character;
 
     public BufferedImage image;
+    public Rectangle2D hitbox;
 
     public NetPlayer(int id, String name)
     {
@@ -42,6 +44,8 @@ public class NetPlayer implements Serializable{
 
         width = 64f;
         height = 64f;
+        hitbox = new Rectangle2D.Float(posX, posY, width, height);
+
 
         character = new PlayerCharacter(this);
     }
@@ -55,15 +59,28 @@ public class NetPlayer implements Serializable{
         this.height = height;
     }
 
+    public void movePosition(float dx, float dy)
+    {
+        this.posX += dx;
+        this.posY += dy;
+
+        hitbox = new Rectangle2D.Float(posX, posY, width, height);
+    }
+
     public void setPosition(float posX, float posY)
     {
         this.posX = posX;
         this.posY = posY;
+
+        hitbox = new Rectangle2D.Float(posX, posY, width, height);
     }
 
     public float[] getPosition(){
         return new float[]{(float)posX, (float)posY};
     }
+
+
+
 
 
     public void setImage(String image)

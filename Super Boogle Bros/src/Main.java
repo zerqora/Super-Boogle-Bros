@@ -3,7 +3,6 @@ import client.Client;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Scanner;
-import javax.swing.JFrame;
 import packets.NewChatPacket;
 import server.Server;
 
@@ -63,14 +62,22 @@ public class Main {
                 server.startServers();
 
                 try {
-                    Client client = new Client("10.10.166.99");
+                    Client client = new Client(InetAddress.getLocalHost().getHostAddress());
                     client.connectSockets();
 
-                    System.out.println();
+                    /* 
+                    for(int i = 0; i < 10; i++)
+                        {
+                            Client client2 = new Client(InetAddress.getLocalHost().getHostAddress());
+                            client2.connectSockets();
+                        }
+                    System.out.println();4
                     System.out.println("Client 2");
-
-                    Client client2 = new Client("10.10.166.99");
+                        */
+                    
+                    Client client2 = new Client(InetAddress.getLocalHost().getHostAddress());
                     client2.connectSockets();
+
                     while (true) {
                         String word = scanner.nextLine();
 
