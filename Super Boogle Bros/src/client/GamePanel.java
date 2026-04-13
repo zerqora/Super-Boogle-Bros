@@ -91,7 +91,7 @@ public class GamePanel extends JPanel implements Runnable
        // movement input   ONLY IF NO OTHER INPUT
        if(inputHandler.inputX != 0 || inputHandler.inputJump)
         {
-            client.sendPacketUdp(UdpPacketWriter.newMovementPacket(client.getId(), inputHandler.inputX , (inputHandler.inputJump) ? -1 : 0)); //x,y
+            client.sendPacketUdp(UdpPacketWriter.newMovementPacket(client.getId(), inputHandler.inputX , (inputHandler.inputJump) ? -5 : 0)); //x,y
             System.out.println("Attempting to send new movement packet from player ID " + client.getId() + " with the desired velocity of " + inputHandler.inputX + " and " + ((inputHandler.inputJump) ? -1 : 0));
         }
        

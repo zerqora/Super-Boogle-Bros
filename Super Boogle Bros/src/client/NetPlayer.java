@@ -86,14 +86,18 @@ public class NetPlayer implements Serializable{
     // server use only
     public void updateGravity()
     {
-        if(isOnGround)
-        {
-            return;
-        }
-        else if(velY == 0)
-        {
+        if(posY < 80){
+            isOnGround = false;
             velY = 1;
         }
+        else{
+            isOnGround = true;
+        }
+        if(isOnGround)
+        {
+            velY = 0;
+        }
+
             
         this.velY *= GRAVITY;
         posY += velY;

@@ -112,7 +112,6 @@ public class TcpServer implements Runnable{
             // tell the server to add a new player
             NetPlayer player = new NetPlayer(newId, newPacket.name);
             server.addPlayer(newId, player);
-            server.broadcastBytesToAllConnections(UdpPacketWriter.newPlayerPacket(newId));
             // collect all the player ids on the server side to send to client
 
         }

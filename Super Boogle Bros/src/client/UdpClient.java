@@ -55,9 +55,6 @@ public class UdpClient implements Runnable{
         ByteBuffer buffer = ByteBuffer.wrap(packet);
         int packetTypeId = (int) buffer.get() & 0xff;  // important for byte conversion
 
-        if(packetTypeId == UdpPacketType.NEW_PLAYER.getId()){
-            client.gameState.addPlayer(buffer);
-        }
         if(packetTypeId == UdpPacketType.POSITION.getId())
         {
             client.gameState.updatePosition(buffer);
