@@ -17,10 +17,12 @@ public class AnimationPlayer {
 
     public int frameTimer = 0;
 
-    public AnimationPlayer() {
+    public AnimationPlayer(String character) {
         animations = new HashMap<>();
         currentFrame = 0;
         currentImage = null;
+
+        fillAnimations(character);
     }
     public void addNewAnimation(String name, BufferedImage[] animation) {
         animations.put(name, animation);
@@ -31,6 +33,18 @@ public class AnimationPlayer {
         currentFrame = 0;
         currentAnimation = animations.get(name);
         currentImage = currentAnimation[currentFrame];
+    }
+
+    private final void fillAnimations(String character) {
+        try{
+            switch (character) {
+                case "WOOGLE":
+                    // fill images here
+                    // TODO: Make Character class so that they could have their abilities and all their animations?
+            }
+        }catch(Exception e){
+
+        }
     }
 
     public BufferedImage getCurrentFrame() {
