@@ -18,7 +18,7 @@ public class Server implements Runnable{
     private UdpServer udpServer;
 
     private Thread gameThread;
-    private ServerGameState gameState;
+    public ServerGameState gameState;
 
     public PlayerHandlerServer playerHandler;
     // holds ip and port of every player
@@ -60,7 +60,7 @@ public class Server implements Runnable{
             ids.add(ep.getId());
         }
 
-        tcpServer.broadcastToAllConnections(new GameStatePacket(ids, (HashMap<Integer, NetPlayer>) PlayerHandlerServer.players.clone()));
+        tcpServer.broadcastToAllConnections(new GameStatePacket(ids, (HashMap<Integer, NetPlayer>) PlayerHandlerServer.players.clone(), gameState.hitboxes));
 
         gameThread = new Thread(this);
         gameThread.start();
@@ -95,13 +95,13 @@ public class Server implements Runnable{
                 update();
                 delta--;
             }
-        }
-        
+        } 
     }
 
     public void update()
     {
-        gameState.updateGravity();
+        gameState.updatePlayers();
+        //gameState.updateGravity();
     }
 
     public void addPlayer(int id, NetPlayer player)

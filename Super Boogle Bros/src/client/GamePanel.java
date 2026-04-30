@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements Runnable
@@ -91,7 +92,7 @@ public class GamePanel extends JPanel implements Runnable
        // movement input   ONLY IF NO OTHER INPUT
        if(inputHandler.inputX != 0 || inputHandler.inputJump)
         {
-            client.sendPacketUdp(UdpPacketWriter.newMovementPacket(client.getId(), inputHandler.inputX , (inputHandler.inputJump) ? -5 : 0)); //x,y
+            client.sendPacketUdp(UdpPacketWriter.newMovementPacket(client.getId(), inputHandler.inputX , (inputHandler.inputJump) ? -1 : 0)); //x,y
             System.out.println("Attempting to send new movement packet from player ID " + client.getId() + " with the desired velocity of " + inputHandler.inputX + " and " + ((inputHandler.inputJump) ? -1 : 0));
         }
        
@@ -110,13 +111,19 @@ public class GamePanel extends JPanel implements Runnable
 
         for(Integer id : gameState.playerIds)
         {
-            //System.out.println("in gamepanel, id in playerIds " + id);
+            //System.out.println("in gamepanel, id in playerIds " + id)
+            NetPlayer np = gameState.playerMap.get(id); // get the netPlayer from the gameState
+            np.draw(graphic2D);
+        }
 
-        
-                NetPlayer np = gameState.playerMap.get(id); // get the netPlayer from the gameState
-                np.draw(graphic2D);
-            
-            
+        for(Rectangle2D.Float hitbox : gameState.hitboxes)
+        {
+            graphic2D.setColor(Color.BLUE);
+            Rectangle2D.Float rect = new Rectangle2D.Float((float) hitbox.getX() * 4f,(float) hitbox.getY() * 4f,(float) hitbox.getWidth() * 4f, (float) hitbox.getHeight() * 4f);
+
+            System.out.println(rect.getY() + " RECT Y");
+
+            graphic2D.draw(rect);
         }
 
         // class.draw(graphic2D), in the class, draw g2.drawImage(image, x, y, width, height)
