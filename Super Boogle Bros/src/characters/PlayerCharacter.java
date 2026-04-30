@@ -1,6 +1,7 @@
-package actions;
+package characters;
 
-import client.NetPlayer;
+import actions.HitboxData;
+
 import java.util.HashMap;
 
 public class PlayerCharacter
@@ -9,12 +10,10 @@ public class PlayerCharacter
     //HashMap<Integer, Animation> animations;   THIS WILL BE WHERE THE ANIMATIONS ARE STORED
 
 
-    public PlayerCharacter(NetPlayer wanker)
+    public PlayerCharacter()
     {
-       
-        
-    }
 
+    }
     public void initializeHitboxes()
     {
 
@@ -23,9 +22,7 @@ public class PlayerCharacter
 
     public void setAction(byte[] data)
     {
-        
-        
-        
+
     }
 
     

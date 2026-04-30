@@ -1,6 +1,8 @@
 package client;
 
-import actions.PlayerCharacter;
+import characters.PlayerCharacter;
+import characters.Woogle.Woogle;
+
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -24,6 +26,9 @@ public class NetPlayer implements Serializable{
     public int health = 200;
     public PlayerCharacter character;
 
+    public BufferedImage image;
+    public Rectangle2D hitbox;
+    public boolean isOnGround = false;
     public NetPlayer(int id, String name)
     {
         this.id = id;
@@ -33,11 +38,6 @@ public class NetPlayer implements Serializable{
 
         width = 64f;
         height = 64f;
-
-    public BufferedImage image;
-    public Rectangle2D hitbox;
-    public AnimationPlayer animationPlayer;
-    public boolean isOnGround = false;
     }
 
     public NetPlayer()
@@ -49,8 +49,7 @@ public class NetPlayer implements Serializable{
         height = 64f;
         hitbox = new Rectangle2D.Float(posX, posY, width, height);
 
-
-        character = new PlayerCharacter(this);
+        character = new Woogle();
     }
 
     public NetPlayer(float posX, float posY, float width, float height)

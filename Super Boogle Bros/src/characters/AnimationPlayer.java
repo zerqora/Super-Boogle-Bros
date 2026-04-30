@@ -1,4 +1,4 @@
-package client;
+package characters;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -17,12 +17,11 @@ public class AnimationPlayer {
 
     public int frameTimer = 0;
 
-    public AnimationPlayer(String character) {
+    public AnimationPlayer() {
         animations = new HashMap<>();
         currentFrame = 0;
         currentImage = null;
 
-        fillAnimations(character);
     }
     public void addNewAnimation(String name, BufferedImage[] animation) {
         animations.put(name, animation);
@@ -35,16 +34,8 @@ public class AnimationPlayer {
         currentImage = currentAnimation[currentFrame];
     }
 
-    private final void fillAnimations(String character) {
-        try{
-            switch (character) {
-                case "WOOGLE":
-                    // fill images here
-                    // TODO: Make Character class so that they could have their abilities and all their animations?
-            }
-        }catch(Exception e){
+    public final void fillAnimations(HashMap<String, BufferedImage[]> animations) {
 
-        }
     }
 
     public BufferedImage getCurrentFrame() {
