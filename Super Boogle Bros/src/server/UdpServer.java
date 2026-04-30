@@ -2,7 +2,6 @@ package server;
 
 import client.NetPlayer;
 import client.UdpPacketType;
-import client.UdpPacketWriter;
 import java.io.IOException;
 import java.net.*;
 import java.nio.ByteBuffer;
@@ -106,21 +105,12 @@ public class UdpServer implements Runnable {
     public void handleMovement(NetPlayer player, int dx, int dy) {
         if (!colliding(player)) {
             // the client should interpolate this smoothly when drawing. the server simply holds the true value of the player's position
-            System.out.println(dx);
 
-            player.movePosition(dx, dy);
-            
-            System.out.println("Player " + player.name + "'s new position is " + player.posX + ", " + player.posY);
-
-            try
+            if(!player.buffer)
             {
-                System.out.println("Broadcasting to all connections");
-                server.broadcastBytesToAllConnections(UdpPacketWriter.newPlayerPositionSnapShot(player.id, player.posX, player.posY));
+                player.addMovementVelocity(dx, dy);
             }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            } 
+            
         }    
     }
 

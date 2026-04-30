@@ -37,7 +37,7 @@ public class EventListener {
         {
             // this is only called once and alligns the server and client sides
 
-            GameState gameState = new GameState(packet.ids, packet.players);
+            GameState gameState = new GameState(packet.ids, packet.players, packet.hitboxes);
             client.initializeGameState(gameState);
             client.initializeGamePanel(gameState);
             client.createWindow();

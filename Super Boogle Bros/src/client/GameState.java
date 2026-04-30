@@ -1,5 +1,6 @@
 package client;
 
+import java.awt.geom.Rectangle2D;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,12 +9,14 @@ public class GameState {
     
     public HashMap<Integer, NetPlayer> playerMap;
     public ArrayList<Integer> playerIds;       
+    public ArrayList<Rectangle2D.Float> hitboxes;
 
 
-    public GameState(ArrayList<Integer> playerIds, HashMap<Integer, NetPlayer> playerMap)
+    public GameState(ArrayList<Integer> playerIds, HashMap<Integer, NetPlayer> playerMap, ArrayList<Rectangle2D.Float> hitboxes)
     { 
         this.playerMap = playerMap;
         this.playerIds = playerIds;
+        this.hitboxes = hitboxes;
     }
 
     //from udp server

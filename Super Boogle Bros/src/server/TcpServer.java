@@ -110,7 +110,7 @@ public class TcpServer implements Runnable{
 
             //System.out.println("Attempting to send instance of gamestate to client");
             // tell the server to add a new player
-            NetPlayer player = new NetPlayer(newId, newPacket.name);
+            NetPlayer player = new NetPlayer(newId, newPacket.name, this.server.gameState.hitboxes);
             server.addPlayer(newId, player);
             // collect all the player ids on the server side to send to client
 
