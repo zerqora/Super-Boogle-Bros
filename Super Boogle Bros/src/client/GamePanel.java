@@ -72,9 +72,11 @@ public class GamePanel extends JPanel implements Runnable
         }
     }
 
+    public int direction = 0;
     public void update()
     {
         
+        direction = (inputHandler.inputX != 0) ? inputHandler.inputX : direction;
        // update player inputs
 
         // update all animations here
@@ -86,7 +88,7 @@ public class GamePanel extends JPanel implements Runnable
             else if(inputHandler.inputY != 0) client.sendPacketUdp(UdpPacketWriter.newBasicAttackPacket(client.getId(), 0, inputHandler.inputY)); // send attack with dy
 
             System.out.println("attempting to send basic movement");
-            return;
+            // dont return bc we want movement during attack
         }
        
        // movement input   ONLY IF NO OTHER INPUT

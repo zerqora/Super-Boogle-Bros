@@ -102,6 +102,8 @@ public class Server implements Runnable{
     {
         gameState.updatePlayers();
         //gameState.updateGravity();
+
+        gameState.checkHitboxCollisions();
     }
 
     public void addPlayer(int id, NetPlayer player)

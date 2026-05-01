@@ -41,6 +41,11 @@ public class ServerGameState {
 
     }
 
+    public void checkHitboxCollisions()
+    {
+        
+    }
+
     /* 
     public void updateGravity()
     {

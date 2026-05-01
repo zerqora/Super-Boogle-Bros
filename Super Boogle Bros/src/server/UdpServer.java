@@ -98,6 +98,7 @@ public class UdpServer implements Runnable {
             case BASIC_ATTACK:
 
                 System.out.println("Basic Attack");
+                
                 break;
         }
     }
